@@ -10,4 +10,4 @@ index.VERSION = '0.0.1';
 
 */
 
-module.exports = require('./lib/queue');
+module.exports = require('./lib/repository');
