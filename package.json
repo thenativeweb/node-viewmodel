@@ -18,7 +18,7 @@
     "mocha": ">= 1.0.1",
     "expect.js": ">= 0.1.2"
   },
-  "description": "Node-queue is a node.js module for multiple databases. It can be very useful if you work with (d)ddd, cqrs, eventsourcing, commands and events, etc.",
+  "description": "Node-viewmodel is a node.js module for multiple databases. It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, etc.",
   "keywords"    : [
     "orm",
     "viewmodel",
