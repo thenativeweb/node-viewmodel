@@ -32,8 +32,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             type: 'mongoDb',
             host: 'localhost',      // optional
             port: 27017,            // optional
-            dbName: 'queuedb',      // optional
-            collectionName: 'queue' // optional
+            dbName: 'viewmodel',      // optional
         }, 
         function(err) {
             if(err) {
@@ -123,7 +122,6 @@ Currently these databases are supported:
 
 1. inMemory
 2. mongoDb ([node-mongodb-native] (https://github.com/mongodb/node-mongodb-native))
-
 
 # License
 
