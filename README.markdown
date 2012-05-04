@@ -32,7 +32,8 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             type: 'mongoDb',
             host: 'localhost',      // optional
             port: 27017,            // optional
-            dbName: 'viewmodel',      // optional
+            dbName: 'viewmodel',    // optional
+            collectionName: 'dummy',// optional and only if you directly want to use a collection, so repo.extend() is not necessary...
         }, 
         function(err) {
             if(err) {
