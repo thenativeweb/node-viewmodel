@@ -62,6 +62,9 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
         dummyRepo.commit(vm, function(err) {
         });
+        // or you can call commit directly on vm...
+        vm.commit(function(err) {
+        });
     });
 
 ## Find...
@@ -103,6 +106,9 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         vm.destroy();
 
         dummyRepo.commit(vm, function(err) {
+        });
+        // or you can call commit directly on vm...
+        vm.commit(function(err) {
         });
     });
 

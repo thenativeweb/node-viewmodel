@@ -12,15 +12,20 @@ repository = repository.extend({
         var obj = _.clone(vm);
         delete obj.actionOnCommit;
         delete obj.destroy;
+        delete obj.commit;
         delete obj.set;
         delete obj.get;
         return obj;
     },
     fromObject: function(obj) {
         var vm = _.clone(obj);
+        var self = this;
         vm.actionOnCommit = vm.actionOnCommit || 'update';
         vm.destroy = function() {
             this.actionOnCommit = 'delete';
+        };
+        vm.commit = function(callback) {
+            self.commit(this, callback);
         };
         vm.set = function(data) {
             if (arguments.length === 2) {
@@ -125,12 +130,13 @@ describe('Write-Repository', function() {
 
                 });
 
-                it('the returned object should have a set and a get and a destroy function', function(done) {
+                it('the returned object should have a set and a get and a destroy and a commit function', function(done) {
 
                     dummyRepo.get('1234', function(err, obj) {
                         expect(obj.set).to.be.a('function');
                         expect(obj.get).to.be.a('function');
                         expect(obj.destroy).to.be.a('function');
+                        expect(obj.commit).to.be.a('function');
                         done();
                     });
 
@@ -274,7 +280,7 @@ describe('Write-Repository', function() {
 
                     });
 
-                    it('the containing objects should have a set and a get and a destroy function', function(done) {
+                    it('the containing objects should have a set and a get and a destroy and a commit function', function(done) {
 
                         dummyRepo.get('4567', function(err, vm1) {
                             dummyRepo.get('4568', function(err, vm2) {
@@ -285,6 +291,8 @@ describe('Write-Repository', function() {
                                     expect(results[1].get).to.be.a('function');
                                     expect(results[0].destroy).to.be.a('function');
                                     expect(results[1].destroy).to.be.a('function');
+                                    expect(results[0].commit).to.be.a('function');
+                                    expect(results[1].commit).to.be.a('function');
                                     done();
                                 });
                             });
@@ -596,6 +604,163 @@ describe('Write-Repository', function() {
                                     vm.destroy();
 
                                     dummyRepo.commit(vm, function(err) {
+                                        dummyRepo.find(function(err, results) {
+                                            expect(results).to.be.an('array');
+                                            expect(results).to.have.length(1);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                    });
+
+                });
+
+            });
+
+            describe('on a single object', function() {
+
+                describe('having an actionOnCommit', function() {
+
+                    beforeEach(function(done) {
+
+                        dummyRepo.get('4567', function(err, vm) {
+                            vm.foo = 'bar';
+
+                            dummyRepo.commit(vm, function(err) {
+                                dummyRepo.get('4568', function(err, vm2) {
+
+                                    vm2.foo = 'wat';
+                                    dummyRepo.commit(vm2, done);
+                                });
+                            });
+                        });
+
+                    });
+
+                    describe('of create', function() {
+
+                        describe('on an existing record', function() {
+
+                            it('it should update the existing record', function(done) {
+
+                                dummyRepo.get('4567', function(err, vm) {
+                                    vm.actionOnCommit = 'create';
+                                    vm.foo = 'baz';
+                                    vm.commit(function(err) {
+                                        dummyRepo.get('4567', function(err, vm2) {
+                                            vm.actionOnCommit = 'update';
+                                            expect(vm2.id).to.eql(vm.id);
+                                            expect(vm2.foo).to.eql(vm.foo);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                        describe('on a non-existing record', function() {
+
+                            it('it should insert a new record', function(done) {
+
+                                dummyRepo.get('4569', function(err, vm) {
+                                    vm.foo = 'baz';
+                                    vm.commit(function(err) {
+                                        dummyRepo.get('4569', function(err, vm2) {
+                                            vm.actionOnCommit = 'update';
+                                            expect(vm2.id).to.eql(vm.id);
+                                            expect(vm2.foo).to.eql(vm.foo);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                    });
+
+                    describe('of update', function() {
+
+                        describe('on a non-existing record', function() {
+
+                            it('it should insert a new record', function(done) {
+
+                                dummyRepo.get('4569', function(err, vm) {
+                                    vm.actionOnCommit = 'update';
+                                    vm.foo = 'baz';
+                                    vm.commit(function(err) {
+                                        dummyRepo.get('4569', function(err, vm2) {
+                                            expect(vm2.id).to.eql(vm.id);
+                                            expect(vm2.foo).to.eql(vm.foo);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                        describe('on an existing record', function() {
+
+                            it('it should update the existing record', function(done) {
+
+                                dummyRepo.get('4567', function(err, vm) {
+                                    vm.foo = 'baz';
+                                    vm.commit(function(err) {
+                                        dummyRepo.get('4567', function(err, vm2) {
+                                            expect(vm2.id).to.eql(vm.id);
+                                            expect(vm2.foo).to.eql(vm.foo);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                    });
+
+                    describe('of delete', function() {
+
+                        describe('on a non-existing record', function() {
+
+                            it('it should not modify the view model database', function(done) {
+
+                                dummyRepo.get('4567', function(err, vm) {
+                                    vm.id = '4569';
+                                    vm.destroy();
+
+                                    vm.commit(function(err) {
+                                        dummyRepo.find(function(err, results) {
+                                            expect(results).to.be.an('array');
+                                            expect(results).to.have.length(2);
+                                            done();
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+
+                        describe('on an existing record', function() {
+
+                            it('it should delete the existing record', function(done) {
+
+                                dummyRepo.get('4567', function(err, vm) {
+                                    vm.destroy();
+
+                                    vm.commit(function(err) {
                                         dummyRepo.find(function(err, results) {
                                             expect(results).to.be.an('array');
                                             expect(results).to.have.length(1);

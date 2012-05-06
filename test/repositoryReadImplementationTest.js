@@ -12,6 +12,7 @@ function setRead() {
         var obj = _.clone(vm);
         delete obj.actionOnCommit;
         delete obj.destroy;
+        delete obj.commit;
         delete obj.set;
         delete obj.get;
         return obj;
@@ -29,15 +30,20 @@ function setWrite() {
         var obj = _.clone(vm);
         delete obj.actionOnCommit;
         delete obj.destroy;
+        delete obj.commit;
         delete obj.set;
         delete obj.get;
         return obj;
     };
     dummyRepo.fromObject = function(obj) {
         var vm = _.clone(obj);
+        var self = this;
         vm.actionOnCommit = vm.actionOnCommit || 'update';
         vm.destroy = function() {
             this.actionOnCommit = 'delete';
+        };
+        vm.commit = function(callback) {
+            self.commit(this, callback);
         };
         vm.set = function(data) {
             if (arguments.length === 2) {
