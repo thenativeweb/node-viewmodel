@@ -5,9 +5,18 @@ describe('Repository', function() {
 
 	describe('calling init', function() {
 
-		describe('on read', function() {
+		describe('on read (or write)', function() {
 
 			var read = repository.read;
+
+			it('it should have marked as connected', function(done) {
+
+				read.init(function(err) {
+					expect(read.isConnected).to.be.ok();
+					done();
+				});
+
+			});
 
 			describe('without options', function() {
 

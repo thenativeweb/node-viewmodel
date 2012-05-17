@@ -81,6 +81,12 @@ describe('Write-Repository', function() {
             cleanRepo(done);
         });
 
+        it('it should be marked as connected', function() {
+
+            expect(repository.isConnected).to.be.ok();
+
+        });
+
         describe('calling connect', function() {
 
             it('it should callback without an error', function(done) {
