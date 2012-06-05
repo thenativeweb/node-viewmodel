@@ -13,6 +13,7 @@ function setRead() {
         delete obj.actionOnCommit;
         delete obj.destroy;
         delete obj.commit;
+	delete obj.toJSON;
         delete obj.set;
         delete obj.get;
         return obj;
@@ -31,6 +32,7 @@ function setWrite() {
         delete obj.actionOnCommit;
         delete obj.destroy;
         delete obj.commit;
+	delete obj.toJSON;
         delete obj.set;
         delete obj.get;
         return obj;
@@ -45,6 +47,7 @@ function setWrite() {
         vm.commit = function(callback) {
             self.commit(this, callback);
         };
+	vm.toJSON = function() { return dummyRepo.fromViewModel(this); };
         vm.set = function(data) {
             if (arguments.length === 2) {
                 this[arguments[0]] = arguments[1];

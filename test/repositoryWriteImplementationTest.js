@@ -13,6 +13,7 @@ repository = repository.extend({
         delete obj.actionOnCommit;
         delete obj.destroy;
         delete obj.commit;
+	delete obj.toJSON;
         delete obj.set;
         delete obj.get;
         return obj;
@@ -27,6 +28,7 @@ repository = repository.extend({
         vm.commit = function(callback) {
             self.commit(this, callback);
         };
+	vm.toJSON = function() { return repository.fromViewModel(this); };
         vm.set = function(data) {
             if (arguments.length === 2) {
                 this[arguments[0]] = arguments[1];
@@ -141,6 +143,7 @@ describe('Write-Repository', function() {
                     dummyRepo.get('1234', function(err, obj) {
                         expect(obj.set).to.be.a('function');
                         expect(obj.get).to.be.a('function');
+                        expect(obj.toJSON).to.be.a('function');
                         expect(obj.destroy).to.be.a('function');
                         expect(obj.commit).to.be.a('function');
                         done();
@@ -295,6 +298,8 @@ describe('Write-Repository', function() {
                                     expect(results[1].set).to.be.a('function');
                                     expect(results[0].get).to.be.a('function');
                                     expect(results[1].get).to.be.a('function');
+                                    expect(results[0].toJSON).to.be.a('function');
+                                    expect(results[1].toJSON).to.be.a('function');
                                     expect(results[0].destroy).to.be.a('function');
                                     expect(results[1].destroy).to.be.a('function');
                                     expect(results[0].commit).to.be.a('function');
