@@ -3,6 +3,21 @@ var expect = require('expect.js')
 
 describe('Repository', function() {
 
+	describe('calling create', function() {
+
+		describe('on read (or write)', function() {
+
+			it('it should return the same type of object as the singleton instance', function() {
+
+				var newReadRepo = repository.read.create();
+				expect(newReadRepo.init).to.eql(repository.read.init);
+
+			});
+
+		});
+
+	});
+
 	describe('calling init', function() {
 
 		describe('on read (or write)', function() {

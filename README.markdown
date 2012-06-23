@@ -123,6 +123,17 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         console.log('the new id is: ' + newId);
     });
 
+## Create an own instance
+
+    var repo = require('viewmodel').read.create();
+
+    repo.init(function(err) {
+        if(err) {
+            console.log('ohhh :-(');
+            return;
+        }
+    });
+
 
 # Database Support
 Currently these databases are supported:
