@@ -521,11 +521,15 @@ describe('Write-Repository', function() {
 
                         describe('on a non-existing record', function() {
 
+                            var obj, retObj;
+
                             it('it should insert a new record', function(done) {
 
                                 dummyRepo.get('4569', function(err, vm) {
                                     vm.foo = 'baz';
-                                    dummyRepo.commit(vm, function(err) {
+                                    obj = vm;
+                                    dummyRepo.commit(vm, function(err, ret) {
+                                        retObj = ret;
                                         dummyRepo.get('4569', function(err, vm2) {
                                             vm.actionOnCommit = 'update';
                                             expect(vm2.id).to.eql(vm.id);
@@ -533,6 +537,17 @@ describe('Write-Repository', function() {
                                             done();
                                         });
                                     });
+                                });
+
+                            });
+
+                            describe('and', function() {
+
+                                it('it should return the vm with updated actionOnCommit', function() {
+
+                                    expect(obj.id).to.eql(retObj.id);
+                                    expect(retObj.actionOnCommit).to.eql('update');
+
                                 });
 
                             });
@@ -565,17 +580,32 @@ describe('Write-Repository', function() {
 
                         describe('on an existing record', function() {
 
+                            var obj, retObj;
+
                             it('it should update the existing record', function(done) {
 
                                 dummyRepo.get('4567', function(err, vm) {
                                     vm.foo = 'baz';
-                                    dummyRepo.commit(vm, function(err) {
+                                    obj = vm;
+                                    dummyRepo.commit(vm, function(err, ret) {
+                                        retObj = ret;
                                         dummyRepo.get('4567', function(err, vm2) {
                                             expect(vm2.id).to.eql(vm.id);
                                             expect(vm2.foo).to.eql(vm.foo);
                                             done();
                                         });
                                     });
+                                });
+
+                            });
+
+                            describe('and', function() {
+
+                                it('it should return the vm with updated actionOnCommit', function() {
+
+                                    expect(obj.id).to.eql(retObj.id);
+                                    expect(retObj.actionOnCommit).to.eql('update');
+
                                 });
 
                             });
