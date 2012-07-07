@@ -29,7 +29,7 @@
     "host",
     "mongodb",
     "memory",
-    "couchdb"
+    "couchdb",
     "database",
     "cqrs",
     "eventsourcing",
