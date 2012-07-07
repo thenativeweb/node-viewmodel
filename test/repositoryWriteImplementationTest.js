@@ -620,8 +620,8 @@ describe('Write-Repository', function() {
 
                             it('it should not modify the view model database', function(done) {
 
-                                dummyRepo.get('4567', function(err, vm) {
-                                    vm.id = '4569';
+                                dummyRepo.get('4567123', function(err, vm) {
+                                    vm.id = '4569123';
                                     vm.destroy();
 
                                     dummyRepo.commit(vm, function(err) {
@@ -777,8 +777,8 @@ describe('Write-Repository', function() {
 
                             it('it should not modify the view model database', function(done) {
 
-                                dummyRepo.get('4567', function(err, vm) {
-                                    vm.id = '4569';
+                                dummyRepo.get('4567123', function(err, vm) {
+                                    vm.id = '4569123';
                                     vm.destroy();
 
                                     vm.commit(function(err) {
