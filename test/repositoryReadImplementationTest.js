@@ -1,6 +1,6 @@
 var expect = require('expect.js')
   , async = require('async')
-  , _ = require('underscore')
+  , _ = require('lodash')
   , repository = require('../lib/databases/inMemory')
   , dummyRepo;
 
