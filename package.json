@@ -1,7 +1,7 @@
 {
   "author": "adrai",
   "name": "viewmodel",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": false,
   "main": "index.js",
   "engines": {
@@ -11,7 +11,7 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "lodash": ">= 0.4.2"
+    "lodash": ">= 0.5.x"
   },
   "devDependencies": {
     "async": ">= 0.1.18",
@@ -45,6 +45,15 @@
     "type": "git",
     "url": "git@github.com:adrai/node-viewmodel.git"
   },
+  "bugs": {
+    "url": "https://github.com/adrai/node-viewmodel/issues"
+  },
+   "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/adrai/node-viewmodel/master/licence"
+    }
+  ],
   "scripts" : { 
     "test" : "mocha"
   } 
