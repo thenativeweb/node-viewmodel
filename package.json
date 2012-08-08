@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/adrai/node-viewmodel/issues"
   },
-   "licenses": [
+  "licenses": [
     {
       "type": "MIT",
       "url": "https://raw.github.com/adrai/node-viewmodel/master/licence"
