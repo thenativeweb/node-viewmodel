@@ -34,6 +34,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             port: 27017,            // optional
             dbName: 'viewmodel',    // optional
             collectionName: 'dummy',// optional and only if you directly want to use a collection, so repo.extend() is not necessary...
+            timeout: 10000          // optional
         }, 
         function(err) {
             if(err) {

@@ -1,7 +1,7 @@
 {
   "author": "adrai",
   "name": "viewmodel",
-  "version": "0.4.11",
+  "version": "0.5.0",
   "private": false,
   "main": "index.js",
   "engines": {
@@ -11,7 +11,8 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "lodash": ">= 0.10.x"
+    "lodash": ">= 2.2.1",
+    "tolerance": ">= 1.0.0"
   },
   "devDependencies": {
     "async": ">= 0.1.18",
@@ -19,7 +20,7 @@
     "expect.js": ">= 0.1.2"
   },
   "description": "Node-viewmodel is a node.js module for multiple databases. It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, etc.",
-  "keywords"    : [
+  "keywords": [
     "orm",
     "viewmodel",
     "repository",
@@ -54,7 +55,7 @@
       "url": "https://raw.github.com/adrai/node-viewmodel/master/licence"
     }
   ],
-  "scripts" : { 
-    "test" : "mocha"
-  } 
+  "scripts": {
+    "test": "mocha"
+  }
 }
