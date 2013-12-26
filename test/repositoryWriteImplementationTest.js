@@ -1,6 +1,7 @@
 var expect = require('expect.js')
   , async = require('async')
   , _ = require('lodash')
+  , ConcurrencyError = require('../lib/concurrencyError')
   , repository = require('../lib/databases/inMemory')
   , dummyRepo;
 
@@ -13,7 +14,7 @@ repository = repository.extend({
         delete obj.actionOnCommit;
         delete obj.destroy;
         delete obj.commit;
-	delete obj.toJSON;
+        delete obj.toJSON;
         delete obj.set;
         delete obj.get;
         return obj;
@@ -28,7 +29,7 @@ repository = repository.extend({
         vm.commit = function(callback) {
             self.commit(this, callback);
         };
-	vm.toJSON = function() { return repository.fromViewModel(this); };
+    vm.toJSON = function() { return repository.fromViewModel(this); };
         vm.set = function(data) {
             if (arguments.length === 2) {
                 this[arguments[0]] = arguments[1];
@@ -116,7 +117,7 @@ describe('Write-Repository', function() {
 
         });
 
-        describe('calling get', function() {        
+        describe('calling get', function() {
 
             describe('without an id', function() {
 
@@ -605,6 +606,34 @@ describe('Write-Repository', function() {
 
                                     expect(obj.id).to.eql(retObj.id);
                                     expect(retObj.actionOnCommit).to.eql('update');
+
+                                });
+
+                            });
+
+                            describe('but beeing updated by someone else in the meantime', function() {
+
+                                it('it should callback with a concurrency error', function(done) {
+
+                                    var org;
+                                    dummyRepo.get('456789123', function(err, vm) {
+                                        vm.foo = 'baz';
+                                        dummyRepo.commit(vm, function(err, ret) {
+                                            dummyRepo.get('456789123', function(err, vm2) {
+                                                vm2.foo = 'baz2';
+                                                org = vm2;
+                                                dummyRepo.commit(vm2, function(err, ret) {
+                                                    dummyRepo.get('456789123', function(err, vm3) {
+                                                        org.foo = 'blablalba';
+                                                        dummyRepo.commit(org, function(err, ret) {
+                                                            expect(err).to.be.a(ConcurrencyError);
+                                                            done();
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
 
                                 });
 
