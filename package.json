@@ -1,7 +1,7 @@
 {
   "author": "adrai",
   "name": "viewmodel",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": false,
   "main": "index.js",
   "engines": {
@@ -11,7 +11,7 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "lodash": ">= 2.2.1",
+    "lodash": ">= 2.4.1",
     "tolerance": ">= 1.0.0"
   },
   "devDependencies": {
