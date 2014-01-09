@@ -7,7 +7,7 @@ var expect = require('expect.js')
 
 repository = repository.extend({
     getNewViewModel: function(id) {
-        return this.fromObject({ id: id, actionOnCommit: 'create', _revision: 1 });
+        return this.fromObject({ id: id, actionOnCommit: 'create' });
     },
     fromViewModel: function(vm) {
         var obj = _.clone(vm);
@@ -29,7 +29,7 @@ repository = repository.extend({
         vm.commit = function(callback) {
             self.commit(this, callback);
         };
-    vm.toJSON = function() { return repository.fromViewModel(this); };
+        vm.toJSON = function() { return repository.fromViewModel(this); };
         vm.set = function(data) {
             if (arguments.length === 2) {
                 this[arguments[0]] = arguments[1];
@@ -152,14 +152,14 @@ describe('Write-Repository', function() {
 
                 });
 
-                it('the returned object should have a revision of 1', function(done) {
+                // it('the returned object should have a revision of 1', function(done) {
 
-                    dummyRepo.get('1234', function(err, obj) {
-                        expect(obj).to.have.property('_revision', 1);
-                        done();
-                    });
+                //     dummyRepo.get('1234', function(err, obj) {
+                //         expect(obj).to.have.property('_revision', 1);
+                //         done();
+                //     });
 
-                });
+                // });
 
             });
 
@@ -183,14 +183,14 @@ describe('Write-Repository', function() {
 
                 });
 
-                it('the returned object should have a revision of 1', function(done) {
+                // it('the returned object should have a revision of 1', function(done) {
 
-                    dummyRepo.get('1234', function(err, obj) {
-                        expect(obj).to.have.property('_revision', 1);
-                        done();
-                    });
+                //     dummyRepo.get('1234', function(err, obj) {
+                //         expect(obj).to.have.property('_revision', 1);
+                //         done();
+                //     });
 
-                });
+                // });
 
             });
 
@@ -499,27 +499,6 @@ describe('Write-Repository', function() {
 
                     describe('of create', function() {
 
-                        describe('on an existing record', function() {
-
-                            it('it should update the existing record', function(done) {
-
-                                dummyRepo.get('4567', function(err, vm) {
-                                    vm.actionOnCommit = 'create';
-                                    vm.foo = 'baz';
-                                    dummyRepo.commit(vm, function(err) {
-                                        dummyRepo.get('4567', function(err, vm2) {
-                                            vm.actionOnCommit = 'update';
-                                            expect(vm2.id).to.eql(vm.id);
-                                            expect(vm2.foo).to.eql(vm.foo);
-                                            done();
-                                        });
-                                    });
-                                });
-
-                            });
-
-                        });
-
                         describe('on a non-existing record', function() {
 
                             var obj, retObj;
@@ -639,6 +618,27 @@ describe('Write-Repository', function() {
 
                             });
 
+                            describe('but beeing updated by someone else in the meantime and creating with the same id', function() {
+
+                                it('it should callback with a concurrency error', function(done) {
+
+                                    dummyRepo.get('6677558899', function(err, vm) {
+                                        vm.foo = 'baz';
+                                        dummyRepo.get('6677558899', function(err, vm2) {
+                                            vm2.foo2 = 'bag';
+                                            dummyRepo.commit(vm, function(err, ret) {
+                                                dummyRepo.commit(vm2, function(err, ret) {
+                                                    expect(err).to.be.a(ConcurrencyError);
+                                                    done();
+                                                });
+                                            });
+                                        });
+                                    });
+
+                                });
+
+                            });
+
                         });
 
                     });
@@ -713,27 +713,6 @@ describe('Write-Repository', function() {
                     });
 
                     describe('of create', function() {
-
-                        describe('on an existing record', function() {
-
-                            it('it should update the existing record', function(done) {
-
-                                dummyRepo.get('4567', function(err, vm) {
-                                    vm.actionOnCommit = 'create';
-                                    vm.foo = 'baz';
-                                    vm.commit(function(err) {
-                                        dummyRepo.get('4567', function(err, vm2) {
-                                            vm.actionOnCommit = 'update';
-                                            expect(vm2.id).to.eql(vm.id);
-                                            expect(vm2.foo).to.eql(vm.foo);
-                                            done();
-                                        });
-                                    });
-                                });
-
-                            });
-
-                        });
 
                         describe('on a non-existing record', function() {
 

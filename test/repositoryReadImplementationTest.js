@@ -25,7 +25,7 @@ function setRead() {
 
 function setWrite() {
     dummyRepo.getNewViewModel = function(id) {
-        return this.fromObject({ id: id, actionOnCommit: 'create', _revision: 1 });
+        return this.fromObject({ id: id, actionOnCommit: 'create' });
     };
     dummyRepo.fromViewModel = function(vm) {
         var obj = _.clone(vm);
