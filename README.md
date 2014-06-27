@@ -1,6 +1,6 @@
 # Introduction
 
-[![Build Status](https://secure.travis-ci.org/adrai/node-viewmodel.png)](http://travis-ci.org/adrai/node-viewmodel)
+[![travis](https://img.shields.io/travis/adrai/node-viewmodel.svg)](https://travis-ci.org/adrai/node-viewmodel) [![npm](https://img.shields.io/npm/v/node-viewmodel.svg)](https://npmjs.org/package/node-viewmodel)
 
 Node-viewmodel is a node.js module for multiple databases.
 It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, etc.
