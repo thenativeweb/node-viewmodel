@@ -38,6 +38,8 @@
     "mongodb",
     "memory",
     "couchdb",
+    "tingodb",
+    "redis",
     "database",
     "cqrs",
     "eventsourcing",
