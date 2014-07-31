@@ -136,13 +136,14 @@ Make shure you have installed the required driver, in this example run: 'npm ins
     });
 
 
+[Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
+
 # Database Support
 Currently these databases are supported:
 
 1. inMemory
 2. mongodb ([node-mongodb-native] (https://github.com/mongodb/node-mongodb-native))
 3. couchdb ([cradle] (https://github.com/cloudhead/cradle))
-4. tingodb ([tingodb] (https://github.com/sergeyksv/tingodb))
 
 # License
 

@@ -1,4 +1,8 @@
-before_script: "npm install --dev"
+# before_script: "npm install"
+
+services:
+  - mongodb
+  - couchdb
 
 language: node_js
 node_js:

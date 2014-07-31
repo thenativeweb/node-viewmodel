@@ -1,7 +1,7 @@
 {
   "author": "adrai",
   "name": "viewmodel",
-  "version": "0.5.5",
+  "version": "1.0.0",
   "private": false,
   "main": "index.js",
   "engines": {
@@ -11,13 +11,19 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "lodash": ">= 2.4.1",
-    "tolerance": ">= 1.0.0"
+    "dotty": "0.0.2",
+    "json-serialize": "^1.1.2",
+    "lodash": "2.4.1",
+    "node-uuid": "1.4.1",
+    "tolerance": "1.0.0"
   },
   "devDependencies": {
     "async": ">= 0.1.18",
+    "cradle": ">=0.6.7",
+    "expect.js": ">= 0.1.2",
     "mocha": ">= 1.0.1",
-    "expect.js": ">= 0.1.2"
+    "mongodb": ">= 0.0.1",
+    "tingodb": ">= 0.0.1"
   },
   "description": "Node-viewmodel is a node.js module for multiple databases. It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, etc.",
   "keywords": [
@@ -56,6 +62,6 @@
     }
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/repositoryTest.js && mocha test/viewmodelTest.js && mocha test/repositoryWriteTest.js && mocha test/repositoryReadTest.js"
   }
 }
