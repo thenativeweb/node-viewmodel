@@ -13,9 +13,9 @@ It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, et
 
 ## Connecting to an in-memory repository in read mode
 
-	var repo = require('viewmodel').read;
+	var viewmodel = require('viewmodel');
 
-	repo.init(function(err) {
+	viewmodel.read(function(err, repository) {
         if(err) {
             console.log('ohhh :-(');
             return;
@@ -25,18 +25,17 @@ It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, et
 ## Connecting to any repository (mongodb in the example / mode=write)
 Make shure you have installed the required driver, in this example run: 'npm install mongodb'.
 
-    var repo = require('viewmodel').write;
+    var viewmodel = require('viewmodel');
 
-    repo.init(
+    viewmodel.write(
         {
             type: 'mongoDb',
             host: 'localhost',      // optional
             port: 27017,            // optional
             dbName: 'viewmodel',    // optional
-            collectionName: 'dummy',// optional and only if you directly want to use a collection, so repo.extend() is not necessary...
             timeout: 10000          // optional
         }, 
-        function(err) {
+        function(err, repository) {
             if(err) {
                 console.log('ohhh :-(');
                 return;
@@ -46,7 +45,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
 ## Define a collection...
 
-    var dummyRepo = repo.extend({
+    var dummyRepo = repository.extend({
         collectionName: 'dummy'
     });
 
@@ -59,7 +58,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         }
 
         vm.set('myProp', 'myValue');
-        vm.color = 'green';
+        vm.set('myProp.deep', 'myValueDeep');
 
         dummyRepo.commit(vm, function(err) {
         });
@@ -80,7 +79,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         // vms is an array of all what is in the repository
         var firstItem = vms[0];
         console.log('the id: ' + firstItem.id);
-        console.log('the saved value: ' + firstItem.color);
+        console.log('the saved value: ' + firstItem.get('color'));
     });
 
 ## Find by id...
@@ -93,7 +92,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         }
 
         console.log('the id: ' + vm.id);
-        console.log('the saved value: ' + vm.color);
+        console.log('the saved value: ' + vm.get('color'));
     });
 
 ## Delete a viewmodel (only in write mode)
@@ -122,17 +121,6 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         }
 
         console.log('the new id is: ' + newId);
-    });
-
-## Create an own instance
-
-    var repo = require('viewmodel').read.create();
-
-    repo.init(function(err) {
-        if(err) {
-            console.log('ohhh :-(');
-            return;
-        }
     });
 
 
