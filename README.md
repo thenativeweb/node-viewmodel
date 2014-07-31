@@ -29,7 +29,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
     viewmodel.write(
         {
-            type: 'mongoDb',
+            type: 'mongodb',
             host: 'localhost',      // optional
             port: 27017,            // optional
             dbName: 'viewmodel',    // optional
@@ -60,6 +60,10 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         vm.set('myProp', 'myValue');
         vm.set('myProp.deep', 'myValueDeep');
 
+        console.log(vm.toJSON());
+
+        console.log(vm.has('myProp.deep'));
+
         dummyRepo.commit(vm, function(err) {
         });
         // or you can call commit directly on vm...
@@ -67,7 +71,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         });
     });
 
-## Find...
+## Find... (query not supported by redis)
 
     // the query object ist like in mongoDb...
     dummyRepo.find({ color: 'green' }, function(err, vms) {
@@ -132,6 +136,8 @@ Currently these databases are supported:
 1. inMemory
 2. mongodb ([node-mongodb-native] (https://github.com/mongodb/node-mongodb-native))
 3. couchdb ([cradle] (https://github.com/cloudhead/cradle))
+4. tingoDb ([tingodb] (https://github.com/sergeyksv/tingodb))
+5. redis ([redis] (https://github.com/mranney/node_redis))
 
 # License
 

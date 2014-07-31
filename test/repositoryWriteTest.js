@@ -1,5 +1,6 @@
 var expect = require('expect.js'),
     async = require('async'),
+    _ = require('lodash'),
     repository = require('../lib/repository'),
     ConcurrencyError = require('../lib/concurrencyError'),
     Base = require('../lib/base'),
@@ -82,7 +83,7 @@ describe('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'couchdb'];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis'];
 
       types.forEach(function(type) {
 
@@ -351,45 +352,17 @@ describe('Repository write', function() {
 
                 });
 
-                describe('with a query object', function() {
+                var limitedCompatabilityTypes = ['redis'];
 
-                  describe('having no records', function() {
+                if (!_.contains(limitedCompatabilityTypes, type)) {
 
-                    it('it should return an empty array', function(done) {
+                  describe('with a query object', function() {
 
-                      dummyRepo.find({}, function(err, results) {
-                        expect(results).to.be.an('array');
-                        expect(results).to.have.length(0);
-                        done();
-                      });
-
-                    });
-
-                  });
-
-                  describe('having any records', function() {
-
-                    beforeEach(function(done) {
-
-                      dummyRepo.get('4567', function(err, vm) {
-                        vm.set('foo', 'bar');
-
-                        dummyRepo.commit(vm, function(err) {
-                          dummyRepo.get('4568', function(err, vm2) {
-
-                            vm.set('foo', 'wat');
-                            dummyRepo.commit(vm2, done);
-                          });
-                        });
-                      });
-
-                    });
-
-                    describe('not matching the query object', function() {
+                    describe('having no records', function() {
 
                       it('it should return an empty array', function(done) {
 
-                        dummyRepo.find({ foo: 'bas' }, function(err, results) {
+                        dummyRepo.find({}, function(err, results) {
                           expect(results).to.be.an('array');
                           expect(results).to.have.length(0);
                           done();
@@ -399,37 +372,72 @@ describe('Repository write', function() {
 
                     });
 
-                    describe('matching the query object', function() {
-
-                      it('it should return all matching records within an array', function(done) {
-
-                        dummyRepo.find({ foo: 'bar' }, function(err, results) {
-                          expect(results).to.be.an('array');
-                          expect(results).to.have.length(1);
-                          done();
-                        });
-
-                      });
-
-                    });
-
-                    describe('matching the query object, that queries an array', function() {
+                    describe('having any records', function() {
 
                       beforeEach(function(done) {
 
                         dummyRepo.get('4567', function(err, vm) {
-                          vm.set('foos', [ {foo: 'bar' } ]);
-                          dummyRepo.commit(vm, done);
+                          vm.set('foo', 'bar');
+
+                          dummyRepo.commit(vm, function(err) {
+                            dummyRepo.get('4568', function(err, vm2) {
+
+                              vm.set('foo', 'wat');
+                              dummyRepo.commit(vm2, done);
+                            });
+                          });
                         });
 
                       });
 
-                      it('it should return all matching records within an array', function(done) {
+                      describe('not matching the query object', function() {
 
-                        dummyRepo.find({ 'foos.foo': 'bar' }, function(err, results) {
-                          expect(results).to.be.an('array');
-                          expect(results).to.have.length(1);
-                          done();
+                        it('it should return an empty array', function(done) {
+
+                          dummyRepo.find({ foo: 'bas' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(0);
+                            done();
+                          });
+
+                        });
+
+                      });
+
+
+                      describe('matching the query object', function() {
+
+                        it('it should return all matching records within an array', function(done) {
+
+                          dummyRepo.find({ foo: 'bar' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(1);
+                            done();
+                          });
+
+                        });
+
+                      });
+
+                      describe('matching the query object, that queries an array', function() {
+
+                        beforeEach(function(done) {
+
+                          dummyRepo.get('4567', function(err, vm) {
+                            vm.set('foos', [ { foo: 'bar' } ]);
+                            dummyRepo.commit(vm, done);
+                          });
+
+                        });
+
+                        it('it should return all matching records within an array', function(done) {
+
+                          dummyRepo.find({ 'foos.foo': 'bar' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(1);
+                            done();
+                          });
+
                         });
 
                       });
@@ -437,8 +445,7 @@ describe('Repository write', function() {
                     });
 
                   });
-
-                });
+                }
 
               });
 

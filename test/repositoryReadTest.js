@@ -1,5 +1,6 @@
 var expect = require('expect.js'),
     async = require('async'),
+    _ = require('lodash'),
     repository = require('../lib/repository'),
     ConcurrencyError = require('../lib/concurrencyError'),
     Base = require('../lib/base'),
@@ -84,7 +85,7 @@ describe('Repository read', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'couchdb'];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis'];
 
       types.forEach(function(type) {
 
@@ -95,6 +96,7 @@ describe('Repository read', function() {
               dummyWriteRepo = repo.extend({
                 collectionName: 'dummies'
               });
+
               done();
             });
           });
@@ -188,6 +190,13 @@ describe('Repository read', function() {
                   dummyRepo = repo.extend({
                     collectionName: 'dummies'
                   });
+
+                  // special case for tingodb
+                  if (type === 'tingodb') {
+                    dummyWriteRepo.db = dummyRepo.db;
+                    dummyWriteRepo.collection = dummyRepo.collection;
+                  }
+
                   done();
                 });
               });
@@ -352,45 +361,17 @@ describe('Repository read', function() {
 
                 });
 
-                describe('with a query object', function() {
+                var limitedCompatabilityTypes = ['redis'];
 
-                  describe('having no records', function() {
+                if (!_.contains(limitedCompatabilityTypes, type)) {
 
-                    it('it should return an empty array', function(done) {
+                  describe('with a query object', function() {
 
-                      dummyRepo.find({}, function(err, results) {
-                        expect(results).to.be.an('array');
-                        expect(results).to.have.length(0);
-                        done();
-                      });
-
-                    });
-
-                  });
-
-                  describe('having any records', function() {
-
-                    beforeEach(function(done) {
-
-                      dummyWriteRepo.get('4567', function(err, vm) {
-                        vm.set('foo', 'bar');
-
-                        dummyWriteRepo.commit(vm, function(err) {
-                          dummyWriteRepo.get('4568', function(err, vm2) {
-
-                            vm.set('foo', 'wat');
-                            dummyWriteRepo.commit(vm2, done);
-                          });
-                        });
-                      });
-
-                    });
-
-                    describe('not matching the query object', function() {
+                    describe('having no records', function() {
 
                       it('it should return an empty array', function(done) {
 
-                        dummyRepo.find({ foo: 'bas' }, function(err, results) {
+                        dummyRepo.find({}, function(err, results) {
                           expect(results).to.be.an('array');
                           expect(results).to.have.length(0);
                           done();
@@ -400,37 +381,71 @@ describe('Repository read', function() {
 
                     });
 
-                    describe('matching the query object', function() {
-
-                      it('it should return all matching records within an array', function(done) {
-
-                        dummyRepo.find({ foo: 'bar' }, function(err, results) {
-                          expect(results).to.be.an('array');
-                          expect(results).to.have.length(1);
-                          done();
-                        });
-
-                      });
-
-                    });
-
-                    describe('matching the query object, that queries an array', function() {
+                    describe('having any records', function() {
 
                       beforeEach(function(done) {
 
                         dummyWriteRepo.get('4567', function(err, vm) {
-                          vm.set('foos', [ {foo: 'bar' } ]);
-                          dummyWriteRepo.commit(vm, done);
+                          vm.set('foo', 'bar');
+
+                          dummyWriteRepo.commit(vm, function(err) {
+                            dummyWriteRepo.get('4568', function(err, vm2) {
+
+                              vm.set('foo', 'wat');
+                              dummyWriteRepo.commit(vm2, done);
+                            });
+                          });
                         });
 
                       });
 
-                      it('it should return all matching records within an array', function(done) {
+                      describe('not matching the query object', function() {
 
-                        dummyRepo.find({ 'foos.foo': 'bar' }, function(err, results) {
-                          expect(results).to.be.an('array');
-                          expect(results).to.have.length(1);
-                          done();
+                        it('it should return an empty array', function(done) {
+
+                          dummyRepo.find({ foo: 'bas' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(0);
+                            done();
+                          });
+
+                        });
+
+                      });
+
+                      describe('matching the query object', function() {
+
+                        it('it should return all matching records within an array', function(done) {
+
+                          dummyRepo.find({ foo: 'bar' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(1);
+                            done();
+                          });
+
+                        });
+
+                      });
+
+                      describe('matching the query object, that queries an array', function() {
+
+                        beforeEach(function(done) {
+
+                          dummyWriteRepo.get('4567', function(err, vm) {
+                            vm.set('foos', [ {foo: 'bar' } ]);
+                            dummyWriteRepo.commit(vm, done);
+                          });
+
+                        });
+
+                        it('it should return all matching records within an array', function(done) {
+
+                          dummyRepo.find({ 'foos.foo': 'bar' }, function(err, results) {
+                            expect(results).to.be.an('array');
+                            expect(results).to.have.length(1);
+                            done();
+                          });
+
                         });
 
                       });
@@ -439,7 +454,7 @@ describe('Repository read', function() {
 
                   });
 
-                });
+                }
 
               });
 

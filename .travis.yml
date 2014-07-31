@@ -3,6 +3,7 @@
 services:
   - mongodb
   - couchdb
+  - redis-server
 
 language: node_js
 node_js:
