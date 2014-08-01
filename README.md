@@ -146,7 +146,7 @@ For mongodb you can define indexes for performance boosts in find function.
 The find function does ignore the query argument and always fetches all items in the collection.
 
 
-[Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
+#[Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
 # Database Support
 Currently these databases are supported:
