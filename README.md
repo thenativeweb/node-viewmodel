@@ -71,7 +71,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         });
     });
 
-## Find... (query not supported by redis)
+## Find...
 
     // the query object ist like in mongoDb...
     dummyRepo.find({ color: 'green' }, function(err, vms) {
@@ -128,6 +128,23 @@ Make shure you have installed the required driver, in this example run: 'npm ins
     });
 
 
+# Implementation differences
+
+## mongodb
+For mongodb you can define indexes for performance boosts in find function.
+
+    var dummyRepo = repository.extend({
+        collectionName: 'dummy',
+        indexes: [
+            { profileId: 1 },
+            // or:
+            { index: {profileId: 1}, options: {} }
+        ]
+    });
+
+## redis
+The find function does ignore the query argument and always fetches all items in the collection.
+
 [Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
 # Database Support
@@ -138,6 +155,29 @@ Currently these databases are supported:
 3. couchdb ([cradle] (https://github.com/cloudhead/cradle))
 4. tingoDb ([tingodb] (https://github.com/sergeyksv/tingodb))
 5. redis ([redis] (https://github.com/mranney/node_redis))
+
+## own db implementation
+You can use your own db implementation by extending this...
+
+    var Repository = require('viewmodel').Repository,
+    util = require('util'),
+        _ = require('lodash');
+
+    function MyDB(options) {
+      Repository.call(this, options);
+    }
+
+    util.inherits(MyDB, Repository);
+
+    _.extend(MyDB.prototype, {
+
+      ...
+
+    });
+
+    module.exports = MyDB;
+
+
 
 # License
 
