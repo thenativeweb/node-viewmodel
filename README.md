@@ -150,6 +150,8 @@ For mongodb you can define indexes for performance boosts in find function.
     var dummyRepo = repository.extend({
         collectionName: 'dummy',
         indexes: [
+            'profileId',
+            // or:
             { profileId: 1 },
             // or:
             { index: {profileId: 1}, options: {} }
