@@ -323,8 +323,8 @@ describe('Repository read', function() {
                             expect(results).to.have.length(2);
                             expect(results.toJSON).to.be.a('function');
                             if (type === 'redis') {
-                              expect(res[0].id === vm1.id || res[1].id === vm1.id);
-                              expect(res[0].id === vm2.id || res[1].id === vm2.id);
+                              expect(results[0].id === vm1.id || results[1].id === vm1.id);
+                              expect(results[0].id === vm2.id || results[1].id === vm2.id);
                               return done();
                             }
                             expect(results[0].id).to.eql(vm1.id);
@@ -347,14 +347,14 @@ describe('Repository read', function() {
                               dummyRepo.find(function(err, results) {
                                 var res = results.toJSON();
                                 if (type === 'redis') {
-                                  expect(res[0].id === '4567' || res[1].id === '4567');
-                                  expect(res[0].id === '4568' || res[1].id === '4568');
+                                  expect(res[0].id === vm1.id || res[1].id === vm1.id);
+                                  expect(res[0].id === vm2.id || res[1].id === vm2.id);
                                   expect(res[0].my === 'data' || res[1].my === 'data');
                                   return done();
                                 }
-                                expect(res[0].id).to.eql('4567');
+                                expect(res[0].id).to.eql(vm1.id);
                                 expect(res[0].my).to.eql('data');
-                                expect(res[1].id).to.eql('4568');
+                                expect(res[1].id).to.eql(vm2.id);
                                 done();
                               });
                             });
