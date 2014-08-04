@@ -313,13 +313,8 @@ describe('Repository write', function() {
                           dummyRepo.find(function(err, results) {
                             expect(results).to.have.length(2);
                             expect(results.toJSON).to.be.a('function');
-                            if (type === 'redis') {
-                              expect(results[0].id === vm1.id || results[1].id === vm1.id);
-                              expect(results[0].id === vm2.id || results[1].id === vm2.id);
-                              return done();
-                            }
-                            expect(results[0].id).to.eql(vm1.id);
-                            expect(results[1].id).to.eql(vm2.id);
+                            expect(results[0].id === vm1.id || results[1].id === vm1.id);
+                            expect(results[0].id === vm2.id || results[1].id === vm2.id);
                             done();
                           });
                         });
@@ -337,15 +332,9 @@ describe('Repository write', function() {
                             dummyRepo.get('4568', function(err, vm2) {
                               dummyRepo.find(function(err, results) {
                                 var res = results.toJSON();
-                                if (type === 'redis') {
-                                  expect(res[0].id === vm1.id || res[1].id === vm1.id);
-                                  expect(res[0].id === vm2.id || res[1].id === vm2.id);
-                                  expect(res[0].my === 'data' || res[1].my === 'data');
-                                  return done();
-                                }
-                                expect(res[0].id).to.eql(vm1.id);
-                                expect(res[0].my).to.eql('data');
-                                expect(res[1].id).to.eql(vm2.id);
+                                expect(res[0].id === vm1.id || res[1].id === vm1.id);
+                                expect(res[0].id === vm2.id || res[1].id === vm2.id);
+                                expect(res[0].my === 'data' || res[1].my === 'data');
                                 done();
                               });
                             });
