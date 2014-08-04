@@ -293,6 +293,7 @@ describe('Repository read', function() {
                       dummyRepo.find(function(err, results) {
                         expect(results).to.be.an('array');
                         expect(results).to.have.length(0);
+                        expect(results.toJSON).to.be.a('function');
                         done();
                       });
 
@@ -320,11 +321,35 @@ describe('Repository read', function() {
                         dummyRepo.get('4568', function(err, vm2) {
                           dummyRepo.find(function(err, results) {
                             expect(results).to.have.length(2);
+                            expect(results.toJSON).to.be.a('function');
                             expect(results[0].id).to.eql(vm1.id);
                             expect(results[1].id).to.eql(vm2.id);
                             done();
                           });
                         });
+                      });
+
+                    });
+
+                    describe('calling toJSON on a result array', function() {
+
+                      it('it should return the correct data', function (done) {
+
+                        dummyWriteRepo.get('4567', function(err, vm1) {
+                          vm1.set('my', 'data');
+                          vm1.commit(function(err) {
+                            dummyWriteRepo.get('4568', function(err, vm2) {
+                              dummyRepo.find(function(err, results) {
+                                var res = results.toJSON();
+                                expect(res[0].id).to.eql('4567');
+                                expect(res[0].my).to.eql('data');
+                                expect(res[1].id).to.eql('4568');
+                                done();
+                              });
+                            });
+                          });
+                        });
+
                       });
 
                     });
