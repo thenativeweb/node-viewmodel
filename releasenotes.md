@@ -1,3 +1,6 @@
+#### v1.0.3
+- parse json with json-serialize
+
 #### v1.0.2
 - mongodb define index as string too
 
