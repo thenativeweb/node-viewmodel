@@ -481,6 +481,55 @@ describe('Repository read', function() {
 
                 }
 
+                describe('with query options', function () {
+
+                  beforeEach(function(done) {
+
+                    cleanRepo(dummyRepo, function() {
+                      dummyWriteRepo.get('4567', function(err, vm) {
+                        vm.set('foo', 'bar');
+
+                        dummyWriteRepo.commit(vm, function(err) {
+                          dummyWriteRepo.get('4568', function(err, vm2) {
+
+                            vm2.set('foo', 'wat');
+                            dummyWriteRepo.commit(vm2, function(err) {
+                              dummyWriteRepo.get('4569', function(err, vm3) {
+
+                                vm3.set('foo', 'bit');
+                                dummyWriteRepo.commit(vm3, done);
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+
+                  });
+
+                  describe('for paging limit: 2, skip: 1', function () {
+
+                    it('it should work as expected', function (done) {
+
+                      dummyRepo.find({}, {
+                        limit: 2,
+                        skip: 1
+                      }, function (err, results) {
+                        expect(results).to.be.an('array');
+                        expect(results.length).to.eql(2);
+                        expect(results.toJSON).to.be.a('function');
+                        expect(results[0].get('foo') === 'wat' || results[1].get('foo') === 'wat');
+                        expect(results[0].get('foo') === 'bit' || results[1].get('foo') === 'bit');
+                        
+                        done();
+                      });
+
+                    });
+
+                  });
+
+                });
+
               });
 
               describe('calling commit', function() {

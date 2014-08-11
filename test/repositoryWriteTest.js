@@ -407,7 +407,7 @@ describe('Repository write', function() {
                           dummyRepo.commit(vm, function(err) {
                             dummyRepo.get('4568', function(err, vm2) {
 
-                              vm.set('foo', 'wat');
+                              vm2.set('foo', 'wat');
                               dummyRepo.commit(vm2, done);
                             });
                           });
@@ -470,7 +470,57 @@ describe('Repository write', function() {
                     });
 
                   });
+
                 }
+
+                describe('with query options', function () {
+
+                  beforeEach(function(done) {
+
+                    cleanRepo(dummyRepo, function() {
+                      dummyRepo.get('4567', function(err, vm) {
+                        vm.set('foo', 'bar');
+
+                        dummyRepo.commit(vm, function(err) {
+                          dummyRepo.get('4568', function(err, vm2) {
+
+                            vm2.set('foo', 'wat');
+                            dummyRepo.commit(vm2, function(err) {
+                              dummyRepo.get('4569', function(err, vm3) {
+
+                                vm3.set('foo', 'bit');
+                                dummyRepo.commit(vm3, done);
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+
+                  });
+
+                  describe('for paging limit: 2, skip: 1', function () {
+
+                    it('it should work as expected', function (done) {
+
+                      dummyRepo.find({}, {
+                        limit: 2,
+                        skip: 1
+                      }, function (err, results) {
+                        expect(results).to.be.an('array');
+                        expect(results.length).to.eql(2);
+                        expect(results.toJSON).to.be.a('function');
+                        expect(results[0].get('foo') === 'wat' || results[1].get('foo') === 'wat');
+                        expect(results[0].get('foo') === 'bit' || results[1].get('foo') === 'bit');
+                        
+                        done();
+                      });
+
+                    });
+
+                  });
+
+                });
 
               });
 

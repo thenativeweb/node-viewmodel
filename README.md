@@ -100,6 +100,21 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         console.log('the saved value: ' + firstItem.get('color'));
     });
 
+## Find with query options
+
+    // the query object ist like in mongoDb...
+    dummyRepo.find({ color: 'green' }, { limit: 2, skip: 1 }, function(err, vms) {
+        if(err) {
+            console.log('ohhh :-(');
+            return;
+        }
+
+        // vms is an array of all what is in the repository
+        var firstItem = vms[0];
+        console.log('the id: ' + firstItem.id);
+        console.log('the saved value: ' + firstItem.get('color'));
+    });
+
 ## Find by id...
 
     // the query object ist like in mongoDb...

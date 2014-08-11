@@ -1,3 +1,6 @@
+#### v1.1.0
+- added possibility to pass query options
+
 #### v1.0.3
 - parse json with json-serialize
 
