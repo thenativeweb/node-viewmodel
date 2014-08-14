@@ -1,3 +1,6 @@
+#### v1.1.1
+- added possibility for inmemory implementation to search with multiple values
+
 #### v1.1.0
 - added possibility to pass query options
 
