@@ -1,3 +1,6 @@
+#### v1.1.2
+- replace json-serialize with jsondate
+
 #### v1.1.1
 - added possibility for inmemory implementation to search with multiple values
 
