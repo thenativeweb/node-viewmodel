@@ -45,17 +45,14 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
 ## Catch connect ad disconnect events
 
-    var repository = viewmodel.write({ type: 'mongodb' }, function(err, repository) {
-        console.log('hello from callback');
-        // use repository here...
-    });
+    var repository = viewmodel.write({ type: 'mongodb' });
     repository.on('connect', function() {
         console.log('hello from event');
-        // or here
     });
     repository.on('disconnect', function() {
         console.log('bye');
     });
+    repository.connect();
 
 ## Define a collection...
 
