@@ -1,3 +1,6 @@
+#### v1.1.3
+- if no passing a callback when initing a new repo, do not automatically connect
+
 #### v1.1.2
 - replace json-serialize with jsondate
 

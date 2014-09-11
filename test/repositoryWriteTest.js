@@ -97,10 +97,14 @@ describe('Repository write', function() {
               repo.disconnect(done);
             });
 
-            it('it should emit connect', function(done) {
+            it('it should not emit connect', function(done) {
 
               repo = repository.write({ type: type });
-              repo.once('connect', done);
+              repo.once('connect', function () {
+                expect(true).to.eql(false);
+              });
+
+              setTimeout(done, 199);
 
             });
           
@@ -116,6 +120,18 @@ describe('Repository write', function() {
               expect(repo.commit).to.be.a('function');
               expect(repo.checkConnection).to.be.a('function');
               expect(repo.extend).to.be.a('function');
+
+            });
+
+            describe('calling connect', function () {
+
+              it('it should emit connect', function(done) {
+
+                repo = repository.write({ type: type });
+                repo.once('connect', done);
+                repo.connect();
+
+              });
 
             });
 
