@@ -1,4 +1,4 @@
-#### v1.1.4
+#### v1.1.5
 - make redis commit transactional
 
 #### v1.1.3
