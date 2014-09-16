@@ -1,5 +1,8 @@
 test
 *.tingo
 *.db
+.DS_Store
 
 dump.rdb
+
+.idea

@@ -1,3 +1,6 @@
+#### v1.1.4
+- make redis commit transactional
+
 #### v1.1.3
 - if no passing a callback when initing a new repo, do not automatically connect
 
