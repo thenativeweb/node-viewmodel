@@ -1,3 +1,6 @@
+#### v1.1.6
+- Fix undefined repository test in ViewModel constructor [#4](https://github.com/adrai/node-viewmodel/pull/4) thanks to [sbiaudet](https://github.com/sbiaudet)
+
 #### v1.1.5
 - make redis commit transactional
 
