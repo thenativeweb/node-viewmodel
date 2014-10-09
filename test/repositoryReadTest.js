@@ -8,16 +8,8 @@ var expect = require('expect.js'),
     InMemory = require('../lib/databases/inmemory'),
     dummyWriteRepo;
 
-function cleanRepo(type, done) {
-  
-  dummyWriteRepo.find(function(err, results) {
-    async.forEach(results, function(item, callback) {
-      item.destroy();
-      dummyWriteRepo.commit(item, callback);
-    }, function(err) {
-      if (!err) done();
-    });
-  });
+function cleanRepo(done) {
+  dummyWriteRepo.clear(done);
 }
 
 describe('Repository read', function() {
@@ -218,7 +210,7 @@ describe('Repository read', function() {
               });
 
               beforeEach(function(done) {
-                cleanRepo(type, done);
+                cleanRepo(done);
               });
 
               describe('calling getNewId', function() {
@@ -501,7 +493,7 @@ describe('Repository read', function() {
 
                   beforeEach(function(done) {
 
-                    cleanRepo(dummyRepo, function() {
+                    cleanRepo(function() {
                       dummyWriteRepo.get('4567', function(err, vm) {
                         vm.set('foo', 'bar');
 

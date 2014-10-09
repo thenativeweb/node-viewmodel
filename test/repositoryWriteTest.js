@@ -8,17 +8,10 @@ var expect = require('expect.js'),
     InMemory = require('../lib/databases/inmemory');
 
 function cleanRepo(repo, done) {
-  repo.find(function(err, results) {
-    async.forEach(results, function(item, callback) {
-      item.destroy();
-      repo.commit(item, callback);
-    }, function(err) {
-      if (!err) done();
-    });
-  });
+  repo.clear(done);
 }
 
-describe('Repository write', function() {
+describe.only('Repository write', function() {
 
   describe('calling write', function() {
 
