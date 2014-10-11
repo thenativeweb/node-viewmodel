@@ -1,3 +1,6 @@
+## v1.2.0
+- added azure-table support [#5](https://github.com/adrai/node-viewmodel/pull/5) thanks to [sbiaudet](https://github.com/sbiaudet)
+
 ## v1.1.7
 - added clear function (only for testing)
 

@@ -184,6 +184,7 @@ Currently these databases are supported:
 3. couchdb ([cradle] (https://github.com/cloudhead/cradle))
 4. tingodb ([tingodb] (https://github.com/sergeyksv/tingodb))
 5. redis ([redis] (https://github.com/mranney/node_redis))
+6. azuretable ([azure-storage](https://github.com/Azure/azure-storage-node))
 
 ## own db implementation
 You can use your own db implementation by extending this...
@@ -205,7 +206,6 @@ You can use your own db implementation by extending this...
     });
 
     module.exports = MyDB;
-
 
 
 # License
