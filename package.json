@@ -24,7 +24,8 @@
     "mocha": ">= 1.0.1",
     "mongodb": ">= 0.0.1",
     "tingodb": ">= 0.0.1",
-    "redis": ">= 0.10.1"
+    "redis": ">= 0.10.1",
+    "azure-storage": ">=0.3.0"
   },
   "description": "Node-viewmodel is a node.js module for multiple databases. It can be very useful if you work with (d)ddd, cqrs, eventdenormalizer, host, etc.",
   "keywords": [
