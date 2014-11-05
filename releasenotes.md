@@ -1,3 +1,6 @@
+## v1.2.1
+- fix paging issue in azure-table [#6](https://github.com/adrai/node-viewmodel/pull/6) thanks to [rvin100](https://github.com/rvin100)
+
 ## v1.2.0
 - added azure-table support [#5](https://github.com/adrai/node-viewmodel/pull/5) thanks to [sbiaudet](https://github.com/sbiaudet)
 
