@@ -1,3 +1,6 @@
+## v1.2.2
+- azure-table: fix issue in getEvents [#7](https://github.com/adrai/node-viewmodel/pull/7) thanks to [rvin100](https://github.com/rvin100)
+
 ## v1.2.1
 - fix paging issue in azure-table [#6](https://github.com/adrai/node-viewmodel/pull/6) thanks to [rvin100](https://github.com/rvin100)
 
