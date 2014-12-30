@@ -1,3 +1,15 @@
+## [v1.2.4](https://github.com/adrai/node-viewmodel/compare/v1.2.3...v1.2.4)
+- fix date issue for azure-table [#8](https://github.com/adrai/node-viewmodel/pull/8) thanks to [sbiaudet](https://github.com/sbiaudet)
+
+## [v1.2.3](https://github.com/adrai/node-viewmodel/compare/v1.2.2...v1.2.3)
+- automatically add commitStamp on commit
+
+## v1.2.2
+- azure-table: fix issue in find [#7](https://github.com/adrai/node-viewmodel/pull/7) thanks to [rvin100](https://github.com/rvin100)
+
+## v1.2.1
+- fix paging issue in azure-table [#6](https://github.com/adrai/node-viewmodel/pull/6) thanks to [rvin100](https://github.com/rvin100)
+
 ## v1.2.0
 - added azure-table support [#5](https://github.com/adrai/node-viewmodel/pull/5) thanks to [sbiaudet](https://github.com/sbiaudet)
 

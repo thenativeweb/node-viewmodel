@@ -181,7 +181,7 @@ describe('ViewModel', function() {
 
         var vm = new ViewModel({ id: 'my id', data: 'other stuff', deeper: { a: 'b' } }, repo);
         var json = vm.toJSON();
-        
+
         expect(json.id).to.eql('my id');
         expect(json.data).to.eql('other stuff');
         expect(json.deeper.a).to.eql('b');

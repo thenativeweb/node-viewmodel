@@ -60,7 +60,7 @@ describe.only('Repository write', function() {
         }).to.throwError();
 
       });
-      
+
     });
 
     describe('with options of an own db implementation', function() {
@@ -71,7 +71,7 @@ describe.only('Repository write', function() {
         expect(repo).to.be.a(InMemory);
 
       });
-      
+
     });
 
     describe('with options containing a type property with the value of', function() {
@@ -100,7 +100,7 @@ describe.only('Repository write', function() {
               setTimeout(done, 199);
 
             });
-          
+
             it('it should return with the correct repository', function() {
 
               repo = repository.write({ type: type });
@@ -135,7 +135,7 @@ describe.only('Repository write', function() {
             afterEach(function(done) {
               repo.disconnect(done);
             });
-          
+
             it('it should return with the correct repository', function(done) {
 
               repository.write({ type: type }, function(err, resR) {
@@ -149,7 +149,7 @@ describe.only('Repository write', function() {
           });
 
           describe('having connected', function() {
-          
+
             describe('calling disconnect', function() {
 
               beforeEach(function(done) {
@@ -172,7 +172,7 @@ describe.only('Repository write', function() {
 
                 repo.once('disconnect', done);
                 repo.disconnect();
-                
+
               });
 
             });
@@ -208,7 +208,7 @@ describe.only('Repository write', function() {
                 });
 
               });
-              
+
               describe('calling get', function() {
 
                 describe('without an id', function() {
@@ -480,7 +480,7 @@ describe.only('Repository write', function() {
                           });
 
                         });
-                      
+
                       }
 
                     });
@@ -528,7 +528,7 @@ describe.only('Repository write', function() {
                         expect(results.toJSON).to.be.a('function');
                         expect(results[0].get('foo') === 'wat' || results[1].get('foo') === 'wat');
                         expect(results[0].get('foo') === 'bit' || results[1].get('foo') === 'bit');
-                        
+
                         done();
                       });
 
@@ -548,11 +548,18 @@ describe.only('Repository write', function() {
 
                     it('it should not modify the view model database', function(done) {
 
+                      var key, value;
                       var obj = {
-                        foo: 'bar'
+                        foo: 'bar',
+                        set: function (k, v) {
+                          key = k;
+                          value = v;
+                        }
                       };
 
                       dummyRepo.commit(obj, function(err) {
+                        expect(key).to.eql('commitStamp');
+                        expect(value).to.be.a('number');
                         dummyRepo.find(function(err, results) {
                           expect(results).to.be.an('array');
                           expect(results).to.have.length(0);
@@ -564,11 +571,18 @@ describe.only('Repository write', function() {
 
                     it('it should callback with error', function(done) {
 
+                      var key, value;
                       var obj = {
-                        foo: 'bar'
+                        foo: 'bar',
+                        set: function (k, v) {
+                          key = k;
+                          value = v;
+                        }
                       };
 
                       dummyRepo.commit(obj, function(err) {
+                        expect(key).to.eql('commitStamp');
+                        expect(value).to.be.a('number');
                         expect(err).to.be.ok();
                         done();
                       });
@@ -581,12 +595,19 @@ describe.only('Repository write', function() {
 
                     it('it should not modify the view model database', function(done) {
 
+                      var key, value;
                       var obj = {
                         actionOnCommit: 'nufta',
-                        foo: 'bar'
+                        foo: 'bar',
+                        set: function (k, v) {
+                          key = k;
+                          value = v;
+                        }
                       };
 
                       dummyRepo.commit(obj, function(err) {
+                        expect(key).to.eql('commitStamp');
+                        expect(value).to.be.a('number');
                         dummyRepo.find(function(err, results) {
                           expect(results).to.be.an('array');
                           expect(results).to.have.length(0);
@@ -598,12 +619,19 @@ describe.only('Repository write', function() {
 
                     it('it should callback with error', function(done) {
 
+                      var key, value;
                       var obj = {
                         actionOnCommit: 'nufta',
-                        foo: 'bar'
+                        foo: 'bar',
+                        set: function (k, v) {
+                          key = k;
+                          value = v;
+                        }
                       };
 
                       dummyRepo.commit(obj, function(err) {
+                        expect(key).to.eql('commitStamp');
+                        expect(value).to.be.a('number');
                         expect(err).to.be.ok();
                         done();
                       });
