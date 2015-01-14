@@ -9,7 +9,7 @@ var expect = require('expect.js'),
     dummyWriteRepo;
 
 function cleanRepo(done) {
-  dummyWriteRepo.clear(done);
+  dummyWriteRepo.clearAll(done);
 }
 
 describe('Repository read', function() {
@@ -61,7 +61,7 @@ describe('Repository read', function() {
         }).to.throwError();
 
       });
-      
+
     });
 
     describe('with options of an own db implementation', function() {
@@ -72,7 +72,7 @@ describe('Repository read', function() {
         expect(repo).to.be.a(InMemory);
 
       });
-      
+
     });
 
     describe('with options containing a type property with the value of', function() {
@@ -111,7 +111,7 @@ describe('Repository read', function() {
               setTimeout(done, 199);
 
             });
-          
+
             it('it should return with the correct repository', function() {
 
               repo = repository.read({ type: type });
@@ -124,6 +124,7 @@ describe('Repository read', function() {
               expect(repo.commit).to.be.a('function');
               expect(repo.checkConnection).to.be.a('function');
               expect(repo.extend).to.be.a('function');
+              expect(repo.clear).to.be.a('function');
 
             });
 
@@ -146,7 +147,7 @@ describe('Repository read', function() {
             afterEach(function(done) {
               repo.disconnect(done);
             });
-          
+
             it('it should return with the correct repository', function(done) {
 
               repository.read({ type: type }, function(err, resR) {
@@ -160,7 +161,7 @@ describe('Repository read', function() {
           });
 
           describe('having connected', function() {
-          
+
             describe('calling disconnect', function() {
 
               beforeEach(function(done) {
@@ -183,7 +184,7 @@ describe('Repository read', function() {
 
                 repo.once('disconnect', done);
                 repo.disconnect();
-                
+
               });
 
             });
@@ -226,7 +227,7 @@ describe('Repository read', function() {
                 });
 
               });
-              
+
               describe('calling get', function() {
 
                 describe('without an id', function() {
@@ -536,7 +537,7 @@ describe('Repository read', function() {
                         expect(results.toJSON).to.be.a('function');
                         expect(results[0].get('foo') === 'wat' || results[1].get('foo') === 'wat');
                         expect(results[0].get('foo') === 'bit' || results[1].get('foo') === 'bit');
-                        
+
                         done();
                       });
 
@@ -572,6 +573,37 @@ describe('Repository read', function() {
                       });
                     }).to.throwError();
                   });
+
+                });
+
+              });
+
+              describe('calling clear', function() {
+
+                beforeEach(function(done) {
+
+                  dummyWriteRepo.get('4567', function(err, vm) {
+                    dummyWriteRepo.commit(vm, function(err) {
+                      dummyWriteRepo.get('4568', function(err, vm) {
+                        dummyWriteRepo.commit(vm, done);
+                      });
+                    });
+                  });
+
+                });
+
+                it('it should throw an error', function(done) {
+
+                  expect(function() {
+                    dummyRepo.clear(function(err) {
+                      expect(err).to.be.ok();
+                      dummyRepo.get('4567', function(err, vm) {
+                        expect(err).not.to.be.ok();
+                        expect(vm).to.be.ok();
+                        done();
+                      });
+                    });
+                  }).to.throwError();
 
                 });
 

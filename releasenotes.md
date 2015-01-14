@@ -1,3 +1,6 @@
+## [v1.2.5](https://github.com/adrai/node-viewmodel/compare/v1.2.4...v1.2.5)
+- added clear functionality to clear a collection
+
 ## [v1.2.4](https://github.com/adrai/node-viewmodel/compare/v1.2.3...v1.2.4)
 - fix date issue for azure-table [#8](https://github.com/adrai/node-viewmodel/pull/8) thanks to [sbiaudet](https://github.com/sbiaudet)
 

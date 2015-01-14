@@ -34,7 +34,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             port: 27017,            // optional
             dbName: 'viewmodel',    // optional
             timeout: 10000          // optional
-        }, 
+        },
         function(err, repository) {
             if(err) {
                 console.log('ohhh :-(');
@@ -153,6 +153,15 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         console.log('the new id is: ' + newId);
     });
 
+## Clear a "collection" (only in write mode)
+
+    dummyRepo.clear(function(err) {
+        if(err) {
+            console.log('ohhh :-(');
+            return;
+        }
+    });
+
 
 # Implementation differences
 
@@ -210,7 +219,7 @@ You can use your own db implementation by extending this...
 
 # License
 
-Copyright (c) 2014 Adriano Raiano
+Copyright (c) 2015 Adriano Raiano
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

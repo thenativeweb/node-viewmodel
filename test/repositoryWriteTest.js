@@ -8,7 +8,7 @@ var expect = require('expect.js'),
     InMemory = require('../lib/databases/inmemory');
 
 function cleanRepo(repo, done) {
-  repo.clear(done);
+  repo.clearAll(done);
 }
 
 describe.only('Repository write', function() {
@@ -113,6 +113,7 @@ describe.only('Repository write', function() {
               expect(repo.commit).to.be.a('function');
               expect(repo.checkConnection).to.be.a('function');
               expect(repo.extend).to.be.a('function');
+              expect(repo.clear).to.be.a('function');
 
             });
 
@@ -986,6 +987,37 @@ describe.only('Repository write', function() {
                     });
 
                   });
+
+                });
+
+              });
+
+              describe('calling clear', function() {
+
+                beforeEach(function(done) {
+
+                  dummyRepo.get('hahaha1', function(err, vm) {
+                    dummyRepo.commit(vm, function(err) {
+                      dummyRepo.get('hahaha2', function(err, vm) {
+                        dummyRepo.commit(vm, done);
+                      });
+                    });
+                  });
+
+                });
+
+                it('it should work as expected', function(done) {
+
+                  expect(function() {
+                    dummyRepo.clear(function (err) {
+                      expect(err).not.to.be.ok();
+                      dummyRepo.find(function (err, vms) {
+                        expect(err).not.to.be.ok();
+                        expect(vms.length).to.eql(0);
+                        done();
+                      });
+                    });
+                  }).not.to.throwError();
 
                 });
 
