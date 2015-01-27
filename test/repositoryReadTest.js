@@ -68,7 +68,7 @@ describe('Repository read', function() {
 
       it('it should return with the an instance of that implementation', function() {
 
-        var repo = repository.read(InMemory);
+        var repo = repository.read({ type: InMemory });
         expect(repo).to.be.a(InMemory);
 
       });

@@ -67,7 +67,7 @@ describe.only('Repository write', function() {
 
       it('it should return with the an instance of that implementation', function() {
 
-        var repo = repository.write(InMemory);
+        var repo = repository.write({ type: InMemory });
         expect(repo).to.be.a(InMemory);
 
       });

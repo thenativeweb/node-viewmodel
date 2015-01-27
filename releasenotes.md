@@ -1,3 +1,6 @@
+## [v1.2.7](https://github.com/adrai/node-viewmodel/compare/v1.2.6...v1.2.7)
+- fix usage with own db implementation
+
 ## [v1.2.6](https://github.com/adrai/node-viewmodel/compare/v1.2.4...v1.2.6)
 - added clear functionality to clear a collection
 
