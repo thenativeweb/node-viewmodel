@@ -1,3 +1,6 @@
+## [v1.2.8](https://github.com/adrai/node-viewmodel/compare/v1.2.7...v1.2.8)
+- some fix for azure-table [#9](https://github.com/adrai/node-viewmodel/pull/9) thanks to [sbiaudet](https://github.com/sbiaudet)
+
 ## [v1.2.7](https://github.com/adrai/node-viewmodel/compare/v1.2.6...v1.2.7)
 - fix usage with own db implementation
 
