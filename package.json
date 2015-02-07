@@ -67,6 +67,6 @@
     }
   ],
   "scripts": {
-    "test": "mocha test/repositoryTest.js && mocha test/viewmodelTest.js && mocha test/repositoryWriteTest.js && mocha test/repositoryReadTest.js"
+    "test": "mocha"
   }
 }
