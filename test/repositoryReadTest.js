@@ -86,7 +86,7 @@ describe('Repository read', function() {
           before(function(done) {
             repository.write({ type: type }, function(err, repo) {
               dummyWriteRepo = repo.extend({
-                collectionName: 'dummies_' + Date.now()
+                collectionName: 'dummies'
               });
 
               done();

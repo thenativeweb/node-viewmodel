@@ -186,7 +186,7 @@ describe('Repository write', function() {
                 repository.write({ type: type }, function(err, resR) {
                   repo = resR;
                   dummyRepo = repo.extend({
-                    collectionName: 'dummies_' + Date.now()
+                    collectionName: 'dummies'
                   });
                   done();
                 });
