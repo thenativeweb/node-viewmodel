@@ -76,7 +76,7 @@ describe('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'documentdb'/*, 'azuretable'*/ ];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'documentdb' /*, 'azuretable'*/];
 
       types.forEach(function(type) {
 
@@ -186,7 +186,7 @@ describe('Repository write', function() {
                 repository.write({ type: type }, function(err, resR) {
                   repo = resR;
                   dummyRepo = repo.extend({
-                    collectionName: 'dummies'
+                    collectionName: 'dummies_' + Date.now()
                   });
                   done();
                 });
