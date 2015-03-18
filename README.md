@@ -112,6 +112,19 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         console.log('the saved value: ' + firstItem.get('color'));
     });
 
+## FindOne
+
+    // the query object ist like in mongoDb...
+    dummyRepo.findOne({ color: 'green' }, function(err, vm) {
+        if(err) {
+            console.log('ohhh :-(');
+            return;
+        }
+
+        console.log('the id: ' + vm.id);
+        console.log('the saved value: ' + vm.get('color'));
+    });
+
 ## Find by id...
 
     // the query object ist like in mongoDb...
@@ -194,6 +207,7 @@ Currently these databases are supported:
 4. tingodb ([tingodb] (https://github.com/sergeyksv/tingodb))
 5. redis ([redis] (https://github.com/mranney/node_redis))
 6. azuretable ([azure-storage](https://github.com/Azure/azure-storage-node))
+7. documentdb ([documentdb](https://github.com/Azure/azure-documentdb-node), [doqmentdb](https://github.com/a8m/doqmentdb))
 
 ## own db implementation
 You can use your own db implementation by extending this...
