@@ -122,7 +122,9 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         }
 
         console.log('the id: ' + vm.id);
-        console.log('the saved value: ' + vm.get('color'));
+        if (vm.has('color')) {
+            console.log('the saved value: ' + vm.get('color'));
+        }
     });
 
 ## Find by id...
