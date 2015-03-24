@@ -76,7 +76,7 @@ describe('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'documentdb' /*, 'azuretable'*/];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis'/*, 'documentdb', 'azuretable'*/];
 
       types.forEach(function(type) {
 
@@ -110,6 +110,7 @@ describe('Repository write', function() {
               expect(repo.getNewId).to.be.a('function');
               expect(repo.get).to.be.a('function');
               expect(repo.find).to.be.a('function');
+              expect(repo.findOne).to.be.a('function');
               expect(repo.commit).to.be.a('function');
               expect(repo.checkConnection).to.be.a('function');
               expect(repo.extend).to.be.a('function');
@@ -538,6 +539,204 @@ describe('Repository write', function() {
                   });
 
                 });
+
+              });
+
+              describe('calling findOne', function() {
+
+                describe('without a query object', function() {
+
+                  describe('having no records', function() {
+
+                    it('it should return an empty array', function(done) {
+
+                      dummyRepo.findOne(function(err, result) {
+                        expect(result).not.to.be.ok();
+                        done();
+                      });
+
+                    });
+
+                  });
+
+                  describe('having any records', function() {
+
+                    beforeEach(function(done) {
+
+                      dummyRepo.get('4567', function(err, vm) {
+                        dummyRepo.commit(vm, function(err) {
+                          dummyRepo.get('4568', function(err, vm) {
+                            dummyRepo.commit(vm, done);
+                          });
+                        });
+                      });
+
+                    });
+
+                    it('it should return all records within an array', function(done) {
+
+                      dummyRepo.get('4567', function(err, vm1) {
+                        dummyRepo.get('4568', function(err, vm2) {
+                          dummyRepo.findOne(function(err, result) {
+                            expect(result.id === vm1.id);
+                            done();
+                          });
+                        });
+                      });
+
+                    });
+
+                    describe('calling toJSON on a result array', function() {
+
+                      it('it should return the correct data', function (done) {
+
+                        dummyRepo.get('4567', function(err, vm1) {
+                          vm1.set('my', 'data');
+                          vm1.commit(function(err) {
+                            dummyRepo.get('4568', function(err, vm2) {
+                              dummyRepo.findOne(function(err, result) {
+                                var res = result.toJSON();
+                                expect(res.id === vm1.id);
+                                expect(res.id === vm2.id);
+                                expect(res.my === 'data');
+                                done();
+                              });
+                            });
+                          });
+                        });
+
+                      });
+
+                    });
+
+                    it('the containing objects should have an actionOnCommit property', function(done) {
+
+                      dummyRepo.get('4567', function(err, vm1) {
+                        dummyRepo.get('4568', function(err, vm2) {
+                          dummyRepo.findOne(function(err, result) {
+                            expect(result).to.be.a(ViewModel);
+                            done();
+                          });
+                        });
+                      });
+
+                    });
+
+                    it('the containing objects should have a set and a get and a destroy and a commit function', function(done) {
+
+                      dummyRepo.get('4567', function(err, vm1) {
+                        dummyRepo.get('4568', function(err, vm2) {
+                          dummyRepo.findOne(function(err, result) {
+                            expect(result).to.be.a(ViewModel);
+                            done();
+                          });
+                        });
+                      });
+
+                    });
+
+                  });
+
+                });
+
+                var limitedCompatabilityTypes = ['redis'];
+
+                if (!_.contains(limitedCompatabilityTypes, type)) {
+
+                  describe('with a query object', function() {
+
+                    describe('having no records', function() {
+
+                      it('it should return an empty array', function(done) {
+
+                        dummyRepo.findOne({}, function(err, result) {
+                          expect(result).not.to.be.ok();
+                          done();
+                        });
+
+                      });
+
+                    });
+
+                    describe('having any records', function() {
+
+                      beforeEach(function(done) {
+
+                        dummyRepo.get('4567', function(err, vm) {
+                          vm.set('foo', 'bar');
+
+                          dummyRepo.commit(vm, function(err) {
+                            dummyRepo.get('4568', function(err, vm2) {
+
+                              vm2.set('foo', 'wat');
+                              dummyRepo.commit(vm2, done);
+                            });
+                          });
+                        });
+
+                      });
+
+                      describe('not matching the query object', function() {
+
+                        it('it should return an empty array', function(done) {
+
+                          dummyRepo.findOne({ foo: 'bas' }, function(err, result) {
+                            expect(result).not.to.be.ok();
+                            done();
+                          });
+
+                        });
+
+                      });
+
+                      describe('matching the query object', function() {
+
+                        it('it should return all matching records within an array', function(done) {
+
+                          dummyRepo.findOne({ foo: 'bar' }, function(err, result) {
+                            expect(result).to.be.ok();
+                            done();
+                          });
+
+                        });
+
+                      });
+
+                      var noQueryArray = ['azuretable', 'documentdb'];
+
+                      if (!_.contains(noQueryArray, type)) {
+
+                        describe('matching the query object, that queries an array', function () {
+
+                          beforeEach(function (done) {
+
+                            dummyRepo.get('4567', function (err, vm) {
+                              vm.set('foos', [
+                                { foo: 'bar' }
+                              ]);
+                              dummyRepo.commit(vm, done);
+                            });
+
+                          });
+
+                          it('it should return all matching records within an array', function (done) {
+
+                            dummyRepo.findOne({ 'foos.foo': 'bar' }, function (err, result) {
+                              expect(result).to.be.ok();
+                              done();
+                            });
+
+                          });
+
+                        });
+
+                      }
+
+                    });
+
+                  });
+
+                }
 
               });
 

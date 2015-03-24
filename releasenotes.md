@@ -1,3 +1,7 @@
+## [v1.3.0](https://github.com/adrai/node-viewmodel/compare/v1.2.8...v1.3.0)
+- added documentdb support [#11](https://github.com/adrai/node-viewmodel/pull/11) thanks to [sbiaudet](https://github.com/sbiaudet)
+- added findOne functionality
+
 ## [v1.2.8](https://github.com/adrai/node-viewmodel/compare/v1.2.7...v1.2.8)
 - some fix for azure-table [#9](https://github.com/adrai/node-viewmodel/pull/9) thanks to [sbiaudet](https://github.com/sbiaudet)
 
