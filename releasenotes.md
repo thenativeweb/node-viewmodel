@@ -1,5 +1,6 @@
 ## [v1.3.1](https://github.com/adrai/node-viewmodel/compare/v1.3.0...v1.3.1)
 - fix errors in azureTable implementation [#12](https://github.com/adrai/node-viewmodel/pull/12) thanks to [rvin100](https://github.com/rvin100)
+- added mongodb driver 2.x support
 
 ## [v1.3.0](https://github.com/adrai/node-viewmodel/compare/v1.2.8...v1.3.0)
 - added documentdb support [#11](https://github.com/adrai/node-viewmodel/pull/11) thanks to [sbiaudet](https://github.com/sbiaudet)
