@@ -14,9 +14,9 @@
     "async": "0.9.0",
     "dotty": "0.0.2",
     "jsondate": "0.0.1",
-    "lodash": "2.4.1",
-    "node-uuid": "1.4.1",
-    "sift": "0.2.3",
+    "lodash": "3.6.0",
+    "node-uuid": "1.4.3",
+    "sift": "1.1.0",
     "tolerance": "1.0.0"
   },
   "devDependencies": {
