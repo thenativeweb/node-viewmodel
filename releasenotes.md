@@ -1,3 +1,6 @@
+## [v1.3.3](https://github.com/adrai/node-viewmodel/compare/v1.3.3...v1.3.4)
+- redis: replace .keys() calls with .scan() calls => scales better
+
 ## [v1.3.3](https://github.com/adrai/node-viewmodel/compare/v1.3.2...v1.3.3)
 - fix errors in azureTable implementation [#13](https://github.com/adrai/node-viewmodel/pull/13) thanks to [rvin100](https://github.com/rvin100)
 
