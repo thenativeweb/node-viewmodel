@@ -11,7 +11,7 @@ function cleanRepo(repo, done) {
   repo.clearAll(done);
 }
 
-describe('Repository write', function() {
+describe.only('Repository write', function() {
 
   describe('calling write', function() {
 
@@ -76,7 +76,8 @@ describe('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis'/*, 'documentdb', 'azuretable'*/];
+      var types = ['elasticsearch'];
+      //var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch'/*, 'documentdb', 'azuretable'*/];
 
       types.forEach(function(type) {
 

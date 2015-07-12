@@ -2,6 +2,7 @@ services:
   - mongodb
   - couchdb
   - redis-server
+  - elasticsearch
 
 language: node_js
 node_js:
