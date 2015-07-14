@@ -1,4 +1,4 @@
-## [v1.4.0](https://github.com/adrai/node-viewmodel/compare/v1.3.4...v1.4.0)
+## [v1.4.1](https://github.com/adrai/node-viewmodel/compare/v1.3.4...v1.4.1)
 - added elasticsearch support
 
 ## [v1.3.3](https://github.com/adrai/node-viewmodel/compare/v1.3.3...v1.3.4)
