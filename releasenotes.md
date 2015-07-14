@@ -1,3 +1,6 @@
+## [v1.4.0](https://github.com/adrai/node-viewmodel/compare/v1.3.4...v1.4.0)
+- added elasticsearch support
+
 ## [v1.3.3](https://github.com/adrai/node-viewmodel/compare/v1.3.3...v1.3.4)
 - redis: replace .keys() calls with .scan() calls => scales better
 

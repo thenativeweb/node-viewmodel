@@ -76,8 +76,7 @@ describe.only('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['elasticsearch'];
-      //var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch'/*, 'documentdb', 'azuretable'*/];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch'/*, 'documentdb', 'azuretable'*/];
 
       types.forEach(function(type) {
 
@@ -478,6 +477,109 @@ describe.only('Repository write', function() {
                               expect(results).to.be.an('array');
                               expect(results).to.have.length(1);
                               done();
+                            });
+
+                          });
+
+                        });
+
+                      }
+
+                      var queryExtended = ['inmemory', 'mongodb', 'tingodb', 'elasticsearch'];
+
+                      if (_.contains(queryExtended, type)) {
+
+                        describe('matching the query object,', function () {
+
+                          beforeEach(function (done) {
+
+                            dummyRepo.get('81234781', function (err, vm) {
+                              vm.set('age', 18);
+                              dummyRepo.commit(vm, function (err) {
+                                dummyRepo.get('14123412', function (err, vm) {
+                                  vm.set('age', 6);
+                                  vm.set('special', true);
+                                  dummyRepo.commit(vm, function (err) {
+                                    dummyRepo.get('941931', function (err, vm) {
+                                      vm.set('age', 34);
+                                      dummyRepo.commit(vm, done);
+                                    });
+                                  });
+                                });
+                              });
+                            });
+
+                          });
+
+                          describe('that queries a range', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({age: {$gte: 10, $lte: 20}}, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(1);
+                                expect(results[0].get('age')).to.eql(18);
+                                done();
+                              });
+
+                            });
+
+                          });
+
+                          describe('that queries with or', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({ $or: [{age: 18}, {special: true}] }, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(2);
+                                done();
+                              });
+
+                            });
+
+                          });
+
+                          describe('that queries with and', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({ $and: [{age: 6}, {special: true}] }, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(1);
+                                done();
+                              });
+
+                            });
+
+                          });
+
+                          describe('that queries and sorts 1/2', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({ $or: [{age: 18}, {special: true}] }, { sort: [['age', 'desc']] }, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(2);
+                                expect(results[0].get('age')).to.eql(18);
+                                done();
+                              });
+
+                            });
+
+                          });
+
+                          describe('that queries and sorts 2/2', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({ $or: [{age: 18}, {special: true}] }, { sort: { age: 1 } }, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(2);
+                                expect(results[0].get('age')).to.eql(6);
+                                done();
+                              });
+
                             });
 
                           });
