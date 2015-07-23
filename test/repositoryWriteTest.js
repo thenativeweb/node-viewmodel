@@ -502,6 +502,7 @@ describe.only('Repository write', function() {
                                   dummyRepo.commit(vm, function (err) {
                                     dummyRepo.get('941931', function (err, vm) {
                                       vm.set('age', 34);
+                                      vm.set('tags', ['a', 'b', 'c']);
                                       dummyRepo.commit(vm, done);
                                     });
                                   });
@@ -576,6 +577,21 @@ describe.only('Repository write', function() {
                               dummyRepo.find({ $or: [{age: 18}, {special: true}] }, { sort: { age: 1 } }, function (err, results) {
                                 expect(results).to.be.an('array');
                                 expect(results).to.have.length(2);
+                                expect(results[0].get('age')).to.eql(6);
+                                done();
+                              });
+
+                            });
+
+                          });
+
+                          describe('that queries with in', function () {
+
+                            it('it should return all matching records within an array', function (done) {
+
+                              dummyRepo.find({ age: { $in: [1, 2, 3, 6] } }, function (err, results) {
+                                expect(results).to.be.an('array');
+                                expect(results).to.have.length(1);
                                 expect(results[0].get('age')).to.eql(6);
                                 done();
                               });
