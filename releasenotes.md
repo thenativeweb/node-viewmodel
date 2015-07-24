@@ -1,4 +1,4 @@
-## [v1.5.0](https://github.com/adrai/node-viewmodel/compare/v1.4.2...v1.5.0)
+## [v1.5.1](https://github.com/adrai/node-viewmodel/compare/v1.4.2...v1.5.1)
 - catch concurrency error on destroy commit
 
 ## [v1.4.2](https://github.com/adrai/node-viewmodel/compare/v1.3.4...v1.4.2)

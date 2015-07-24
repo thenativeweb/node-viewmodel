@@ -1074,17 +1074,15 @@ describe.only('Repository write', function() {
 
                           it('it should callback with a concurrency error', function(done) {
 
-                            var org = new ViewModel({id: '456789123'}, dummyRepo);
                             dummyRepo.get('456789123', function(err, vm) {
                               vm.set('foo', 'baz');
                               dummyRepo.commit(vm, function(err, ret) {
                                 dummyRepo.get('456789123', function(err, vm2) {
                                   vm2.set('foo', 'baz2');
-                                  org.set(vm2.toJSON());
                                   dummyRepo.commit(vm2, function(err, ret) {
                                     dummyRepo.get('456789123', function(err, vm3) {
-                                      org.set('foo', 'blablalba');
-                                      dummyRepo.commit(org, function(err, ret) {
+                                      vm.set('foo', 'blablalba');
+                                      dummyRepo.commit(vm, function(err, ret) {
                                         expect(err).to.be.a(ConcurrencyError);
                                         done();
                                       });
@@ -1105,7 +1103,7 @@ describe.only('Repository write', function() {
                             dummyRepo.get('6677558899', function(err, vm) {
                               vm.set('foo', 'baz');
                               dummyRepo.get('6677558899', function(err, vm2) {
-                                vm.set('foo2', 'bag');
+                                vm2.set('foo2', 'bag');
                                 dummyRepo.commit(vm, function(err, ret) {
                                   dummyRepo.commit(vm2, function(err, ret) {
                                     expect(err).to.be.a(ConcurrencyError);
@@ -1134,6 +1132,8 @@ describe.only('Repository write', function() {
                             vm.destroy();
 
                             dummyRepo.commit(vm, function(err) {
+                              expect(err).not.to.be.ok();
+
                               dummyRepo.find(function(err, results) {
                                 expect(results).to.be.an('array');
                                 expect(results).to.have.length(2);
