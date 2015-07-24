@@ -1164,6 +1164,34 @@ describe.only('Repository write', function() {
 
                         });
 
+                        describe('but beeing updated by someone else in the meantime', function() {
+
+                          it('it should callback with a concurrency error', function(done) {
+
+                            var org = new ViewModel({id: '34567891232'}, dummyRepo);
+                            dummyRepo.get('34567891232', function(err, vm) {
+                              vm.set('foo', 'baz');
+                              dummyRepo.commit(vm, function(err, ret) {
+                                dummyRepo.get('34567891232', function(err, vm2) {
+                                  vm2.set('foo', 'baz2');
+                                  org.set(vm2.toJSON());
+                                  dummyRepo.commit(vm2, function(err, ret) {
+                                    dummyRepo.get('34567891232', function(err, vm3) {
+                                      org.destroy();
+                                      dummyRepo.commit(org, function(err, ret) {
+                                        expect(err).to.be.a(ConcurrencyError);
+                                        done();
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+                            });
+
+                          });
+
+                        });
+
                       });
 
                     });
