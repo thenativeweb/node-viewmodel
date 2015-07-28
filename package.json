@@ -16,7 +16,7 @@
     "jsondate": "0.0.1",
     "lodash": "3.10.0",
     "node-uuid": "1.4.3",
-    "parent-require": "^1.0.0",
+    "parent-require": "1.0.0",
     "sift": "2.0.3",
     "tolerance": "1.0.0"
   },
