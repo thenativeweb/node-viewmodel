@@ -1,3 +1,6 @@
+## [v1.5.2](https://github.com/adrai/node-viewmodel/compare/v1.5.1...v1.5.2)
+- optimization for `npm link`'ed development
+
 ## [v1.5.1](https://github.com/adrai/node-viewmodel/compare/v1.4.2...v1.5.1)
 - catch concurrency error on destroy commit
 
