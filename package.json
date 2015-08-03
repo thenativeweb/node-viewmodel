@@ -17,7 +17,7 @@
     "lodash": "3.10.0",
     "node-uuid": "1.4.3",
     "parent-require": "1.0.0",
-    "sift": "^2.0.4",
+    "sift": "2.0.4",
     "tolerance": "1.0.0"
   },
   "devDependencies": {
@@ -26,7 +26,7 @@
     "documentdb": ">=0.9.3",
     "doqmentdb": ">=0.2.7",
     "elasticsearch": ">=5.0.0",
-    "eslint": "^1.0.0",
+    "eslint": ">=1.0.0",
     "expect.js": ">= 0.1.2",
     "mocha": ">= 1.0.1",
     "mongodb": ">= 0.0.1",
