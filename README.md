@@ -86,6 +86,14 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
     // the query object ist like in mongoDb...
     dummyRepo.find({ color: 'green' }, function(err, vms) {
+    // or
+    //dummyRepo.find({ 'deep.prop': 'dark' }, function(err, vms) {
+    // or
+    //dummyRepo.find({ age: { $gte: 10, $lte: 20 } }, function(err, vms) {
+    // or
+    //dummyRepo.find({ $or: [{age: 18}, {special: true}] }, function(err, vms) {
+    // or
+    //dummyRepo.find({ age: { $in: [1, 2, 3, 6] } }, function(err, vms) {
         if(err) {
             console.log('ohhh :-(');
             return;
@@ -100,7 +108,9 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 ## Find with query options
 
     // the query object ist like in mongoDb...
-    dummyRepo.find({ color: 'green' }, { limit: 2, skip: 1 }, function(err, vms) {
+    dummyRepo.find({ color: 'green' }, { limit: 2, skip: 1, sort: { age: 1 } }, function(err, vms) {
+    // or
+    //dummyRepo.find({ color: 'green' }, { limit: 2, skip: 1, sort: [['age', 'desc']] }, function(err, vms) {
         if(err) {
             console.log('ohhh :-(');
             return;
@@ -198,7 +208,7 @@ For mongodb you can define indexes for performance boosts in find function.
 The find function does ignore the query argument and always fetches all items in the collection.
 
 
-#[Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
+# [Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
 # Database Support
 Currently these databases are supported:

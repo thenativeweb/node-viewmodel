@@ -1,3 +1,6 @@
+## [v1.5.3](https://github.com/adrai/node-viewmodel/compare/v1.5.2...v1.5.3)
+- added possiblity to query with regex
+
 ## [v1.5.2](https://github.com/adrai/node-viewmodel/compare/v1.5.1...v1.5.2)
 - optimization for `npm link`'ed development
 

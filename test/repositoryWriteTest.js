@@ -495,14 +495,17 @@ describe.only('Repository write', function() {
 
                             dummyRepo.get('81234781', function (err, vm) {
                               vm.set('age', 18);
+                              vm.set('name', 'abcdefg');
                               dummyRepo.commit(vm, function (err) {
                                 dummyRepo.get('14123412', function (err, vm) {
                                   vm.set('age', 6);
                                   vm.set('special', true);
+                                  vm.set('name', 'defghijklmnopq');
                                   dummyRepo.commit(vm, function (err) {
                                     dummyRepo.get('941931', function (err, vm) {
                                       vm.set('age', 34);
                                       vm.set('tags', ['a', 'b', 'c']);
+                                      vm.set('name', 'opqrstuvwxyz');
                                       dummyRepo.commit(vm, done);
                                     });
                                   });
@@ -594,6 +597,53 @@ describe.only('Repository write', function() {
                                 expect(results).to.have.length(1);
                                 expect(results[0].get('age')).to.eql(6);
                                 done();
+                              });
+
+                            });
+
+                          });
+
+                          if (type !== 'tingodb') {
+
+                            describe('that queries with regex', function () {
+
+                              it('it should return all matching records within an array', function (done) {
+
+                                dummyRepo.find({$or:[{name:{$regex:'.*pq.*'}}]}, {
+                                  limit: 2,
+                                  skip: 1,
+                                  sort: { age: 1 }
+                                }, function (err, results) {
+                                  expect(results).to.be.an('array');
+                                  expect(results).to.have.length(1);
+                                  expect(results[0].get('age')).to.eql(34);
+                                  done();
+                                });
+
+                              });
+
+                            });
+
+                          }
+
+                          describe('with query options', function () {
+
+                            describe('for paging limit: 2, skip: 1 and sort', function () {
+
+                              it('it should work as expected', function (done) {
+
+                                dummyRepo.find({age: {$gte: 0}}, {
+                                  limit: 2,
+                                  skip: 1,
+                                  sort: { age: 1 }
+                                }, function (err, results) {
+                                  expect(results).to.be.an('array');
+                                  expect(results).to.have.length(2);
+                                  expect(results[0].get('age')).to.eql(18);
+                                  expect(results[1].get('age')).to.eql(34);
+                                  done();
+                                });
+
                               });
 
                             });
