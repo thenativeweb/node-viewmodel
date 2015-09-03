@@ -1,3 +1,6 @@
+## [v1.5.4](https://github.com/adrai/node-viewmodel/compare/v1.5.3...v1.5.4)
+- updated dep
+
 ## [v1.5.3](https://github.com/adrai/node-viewmodel/compare/v1.5.2...v1.5.3)
 - added possiblity to query with regex
 
