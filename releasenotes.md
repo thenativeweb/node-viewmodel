@@ -1,3 +1,6 @@
+## [v1.5.5](https://github.com/adrai/node-viewmodel/compare/v1.5.4...v1.5.5)
+- give possibility to use mongodb with authSource
+
 ## [v1.5.4](https://github.com/adrai/node-viewmodel/compare/v1.5.3...v1.5.4)
 - updated dep
 

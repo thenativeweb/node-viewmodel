@@ -34,6 +34,9 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             port: 27017,            // optional
             dbName: 'viewmodel',    // optional
             timeout: 10000          // optional
+            // authSource: 'authedicationDatabase',        // optional
+      	    // username: 'technicalDbUser',                // optional
+      	    // password: 'secret'                          // optional
         },
         function(err, repository) {
             if(err) {
