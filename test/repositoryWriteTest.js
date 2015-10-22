@@ -1204,6 +1204,7 @@ describe.only('Repository write', function() {
                             vm.destroy();
 
                             dummyRepo.commit(vm, function(err) {
+                              expect(err).not.to.be.ok();
                               dummyRepo.find(function(err, results) {
                                 expect(results).to.be.an('array');
                                 expect(results).to.have.length(1);

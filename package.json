@@ -28,6 +28,7 @@
     "elasticsearch": ">=5.0.0",
     "eslint": ">=1.0.0",
     "expect.js": ">= 0.1.2",
+    "hiredis": ">=0.4.1",
     "mocha": ">= 1.0.1",
     "mongodb": ">= 0.0.1",
     "redis": ">= 0.10.1",

@@ -1,3 +1,6 @@
+## [v1.5.7](https://github.com/adrai/node-viewmodel/compare/v1.5.6...v1.5.7)
+- redis: fix wrong multi response handling
+
 ## [v1.5.6](https://github.com/adrai/node-viewmodel/compare/v1.5.5...v1.5.6)
 - speed up mongodb and inmemory commits
 
