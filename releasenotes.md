@@ -1,3 +1,6 @@
+## [v1.5.8](https://github.com/adrai/node-viewmodel/compare/v1.5.7...v1.5.8)
+- mongodb: do not call ensureIndexes on clear
+
 ## [v1.5.7](https://github.com/adrai/node-viewmodel/compare/v1.5.6...v1.5.7)
 - redis: fix wrong multi response handling
 
