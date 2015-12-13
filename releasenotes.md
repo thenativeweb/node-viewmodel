@@ -1,3 +1,6 @@
+## [v1.5.9](https://github.com/adrai/node-viewmodel/compare/v1.5.8...v1.5.9)
+- mongodb: added optional heartbeat
+
 ## [v1.5.8](https://github.com/adrai/node-viewmodel/compare/v1.5.7...v1.5.8)
 - mongodb: do not call ensureIndexes on clear
 
