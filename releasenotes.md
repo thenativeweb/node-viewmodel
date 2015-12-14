@@ -1,3 +1,6 @@
+## [v1.5.10](https://github.com/adrai/node-viewmodel/compare/v1.5.9...v1.5.10)
+- redis: fix for new redis lib
+
 ## [v1.5.9](https://github.com/adrai/node-viewmodel/compare/v1.5.8...v1.5.9)
 - mongodb: added optional heartbeat
 
