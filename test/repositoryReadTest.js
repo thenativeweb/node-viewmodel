@@ -398,7 +398,7 @@ describe('Repository read', function() {
 
                 var limitedCompatabilityTypes = ['redis'];
 
-                if (!_.contains(limitedCompatabilityTypes, type)) {
+                if (!_.includes(limitedCompatabilityTypes, type)) {
 
                   describe('with a query object', function() {
 
@@ -464,7 +464,7 @@ describe('Repository read', function() {
 
                       var noQueryArray = ['azuretable', 'documentdb'];
 
-                      if (!_.contains(noQueryArray, type)) {
+                      if (!_.includes(noQueryArray, type)) {
 
                         describe('matching the query object, that queries an array', function () {
 
@@ -649,7 +649,7 @@ describe('Repository read', function() {
 
                 var limitedCompatabilityTypes = ['redis'];
 
-                if (!_.contains(limitedCompatabilityTypes, type)) {
+                if (!_.includes(limitedCompatabilityTypes, type)) {
 
                   describe('with a query object', function() {
 
@@ -712,7 +712,7 @@ describe('Repository read', function() {
 
                       var noQueryArray = ['azuretable', 'documentdb'];
 
-                      if (!_.contains(noQueryArray, type)) {
+                      if (!_.includes(noQueryArray, type)) {
 
                         describe('matching the query object, that queries an array', function () {
 

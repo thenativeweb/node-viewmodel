@@ -1,3 +1,6 @@
+## [v1.5.11](https://github.com/adrai/node-viewmodel/compare/v1.5.10...v1.5.11)
+- azuretable: array properties were not properly stored in entity [#44](https://github.com/adrai/node-viewmodel/pull/44) thanks to [mpseidel](https://github.com/mpseidel)
+
 ## [v1.5.10](https://github.com/adrai/node-viewmodel/compare/v1.5.9...v1.5.10)
 - redis: fix for new redis lib
 
