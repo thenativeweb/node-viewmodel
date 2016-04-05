@@ -1,3 +1,6 @@
+## [v1.5.12](https://github.com/adrai/node-viewmodel/compare/v1.5.11...v1.5.12)
+- redis: added optional heartbeat
+
 ## [v1.5.11](https://github.com/adrai/node-viewmodel/compare/v1.5.10...v1.5.11)
 - azuretable: array properties were not properly stored in entity [#44](https://github.com/adrai/node-viewmodel/pull/44) thanks to [mpseidel](https://github.com/mpseidel)
 
