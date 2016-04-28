@@ -1,3 +1,6 @@
+## [v1.5.13](https://github.com/adrai/node-viewmodel/compare/v1.5.12...v1.5.13)
+- redis, mongodb: call disconnect on ping error
+
 ## [v1.5.12](https://github.com/adrai/node-viewmodel/compare/v1.5.11...v1.5.12)
 - redis: added optional heartbeat
 
