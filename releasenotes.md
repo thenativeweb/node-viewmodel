@@ -1,3 +1,6 @@
+## [v1.5.14](https://github.com/adrai/node-viewmodel/compare/v1.5.13...v1.5.14)
+- inmemory: now correctly instantiates with collectionName [#46](https://github.com/adrai/node-viewmodel/pull/46) thanks to [hilkeheremans](https://github.com/hilkeheremans)
+
 ## [v1.5.13](https://github.com/adrai/node-viewmodel/compare/v1.5.12...v1.5.13)
 - redis, mongodb: call disconnect on ping error
 
