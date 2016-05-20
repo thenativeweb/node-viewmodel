@@ -1,4 +1,4 @@
-## [v1.5.16](https://github.com/adrai/node-viewmodel/compare/v1.5.14...v1.5.16)
+## [v1.5.17](https://github.com/adrai/node-viewmodel/compare/v1.5.14...v1.5.17)
 - Support mongo connection string
 
 ## [v1.5.14](https://github.com/adrai/node-viewmodel/compare/v1.5.13...v1.5.14)
