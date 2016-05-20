@@ -37,6 +37,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
             // authSource: 'authedicationDatabase',        // optional
       	    // username: 'technicalDbUser',                // optional
       	    // password: 'secret'                          // optional
+            // url: 'mongodb://user:pass@host:port/db?opts // optional
         },
         function(err, repository) {
             if(err) {

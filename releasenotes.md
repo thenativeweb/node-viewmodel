@@ -1,3 +1,6 @@
+## [v1.5.15](https://github.com/adrai/node-viewmodel/compare/v1.5.14...v1.5.15)
+- Support mongo connection string
+
 ## [v1.5.14](https://github.com/adrai/node-viewmodel/compare/v1.5.13...v1.5.14)
 - inmemory: now correctly instantiates with collectionName [#46](https://github.com/adrai/node-viewmodel/pull/46) thanks to [hilkeheremans](https://github.com/hilkeheremans)
 
