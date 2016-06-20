@@ -1,3 +1,6 @@
+## [v1.5.18](https://github.com/adrai/node-viewmodel/compare/v1.5.17...v1.5.18)
+- redis, mongodb: call disconnect on ping error
+
 ## [v1.5.17](https://github.com/adrai/node-viewmodel/compare/v1.5.14...v1.5.17)
 - Support mongo connection string
 
