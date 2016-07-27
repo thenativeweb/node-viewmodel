@@ -1,3 +1,6 @@
+## [v1.5.19](https://github.com/adrai/node-viewmodel/compare/v1.5.18...v1.5.19)
+- mongodb: try to create collection earlier (on extend call)
+
 ## [v1.5.18](https://github.com/adrai/node-viewmodel/compare/v1.5.17...v1.5.18)
 - redis, mongodb: call disconnect on ping error
 
