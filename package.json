@@ -11,14 +11,14 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "async": "1.5.2",
+    "async": "2.1.4",
     "dotty": "0.0.2",
     "jsondate": "0.0.1",
-    "lodash": "4.11.1",
+    "lodash": "4.17.2",
     "parent-require": "1.0.0",
-    "sift": "3.2.1",
+    "sift": "3.2.6",
     "tolerance": "1.0.0",
-    "uuid": "^3.0.0"
+    "uuid": "3.0.0"
   },
   "devDependencies": {
     "azure-storage": ">=0.3.0",
