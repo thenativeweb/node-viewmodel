@@ -23,7 +23,6 @@ globals:
   describeChapter: false
   describeStep: false
   document : false
-  window: false
   File : false
   FormData: false
   QCodeDecoder: false
