@@ -239,6 +239,29 @@ repository.find( onlyTheQueryClause, otherBodyOptions, callback);
         });
 ```
 
+Additionaly for elasticsearch6 the number of shards, number of replicas, the refresh behaivour on index and the mappings on index create can be addtionaly defined to optimize performace.
+
+```javascript
+    var dummyRepo = repository.extend({
+        collectionName: 'dummy',
+        repositorySettings: {
+            refresh: 'wait_for', // default is true,
+            numberOfShards: 3, // default is 1
+            numberOfReplicas: 4,
+            indexCreate: {
+                mappings : { // will be merged with the default ones
+                    properties: {
+                        title: {
+                            type: "text"
+                        }
+                    }                    
+                }
+            }
+        }
+    });
+```
+
+
 # [Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
 # Database Support
