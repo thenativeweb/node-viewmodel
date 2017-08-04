@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 
 # Elasticsearch 5 requires Java 8
 # https://www.peterbe.com/plog/elasticsearch-5-in-travis-ci 
