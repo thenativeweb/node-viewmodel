@@ -211,6 +211,33 @@ For mongodb you can define indexes for performance boosts in find function.
 ## redis
 The find function does ignore the query argument and always fetches all items in the collection.
 
+## Elasticsearch >= 5.X
+Use the 'elasticsearch6' type for Elasticsearch versions 5.X and 6.X.
+
+The find queries are not mongoDb compatible as the rest of the implementations due to the uneeded overhead and complexity of converting between both formats.
+
+For find queries with elasticsearch6 use elasticsearch [native elastic Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html);
+
+repository.find( onlyTheQueryClause, otherBodyOptions, callback);
+
+```javascript
+    repository.find(
+        {
+            range : {
+                age : {
+                    gte : 10,
+                    lte : 20
+                }
+            }
+        ),
+        {
+            from: 0,
+            size: 10,
+            sort: { age: 'asc' }
+        },
+        function(error, results) {
+        });
+```
 
 # [Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
@@ -225,6 +252,7 @@ Currently these databases are supported:
 6. azuretable ([azure-storage](https://github.com/Azure/azure-storage-node))
 7. documentdb ([documentdb](https://github.com/Azure/azure-documentdb-node), [doqmentdb](https://github.com/a8m/doqmentdb))
 8. elasticsearch ([elasticsearch] (https://github.com/elastic/elasticsearch-js))
+9. elasticsearch6 ([elasticsearch] (https://github.com/elastic/elasticsearch-js)) - for Elasticsearch 5.x and 6.x
 
 ## own db implementation
 You can use your own db implementation by extending this...
