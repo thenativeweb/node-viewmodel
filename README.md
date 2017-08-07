@@ -199,6 +199,7 @@ For mongodb you can define indexes for performance boosts in find function.
 
     var dummyRepo = repository.extend({
         collectionName: 'dummy',
+        // like that
         indexes: [
             'profileId',
             // or:
@@ -206,6 +207,18 @@ For mongodb you can define indexes for performance boosts in find function.
             // or:
             { index: {profileId: 1}, options: {} }
         ]
+        // or like that
+        repositorySettings : {
+            mongodb: {
+                indexes: [ // same as above
+                    'profileId',
+                    // or:
+                    { profileId: 1 },
+                    // or:
+                    { index: {profileId: 1}, options: {} }
+                ]
+            }
+        }
     });
 
 ## redis
@@ -245,16 +258,21 @@ Additionaly for elasticsearch6 the number of shards, number of replicas, the ref
     var dummyRepo = repository.extend({
         collectionName: 'dummy',
         repositorySettings: {
-            refresh: 'wait_for', // default is true,
-            numberOfShards: 3, // default is 1
-            numberOfReplicas: 4,
-            indexCreate: {
-                mappings : { // will be merged with the default ones
-                    properties: {
-                        title: {
-                            type: "text"
-                        }
-                    }                    
+            elasticsearch6: {
+                refresh: 'wait_for', // optional, refresh behaviour on index, default is true ( ie. force index refresh ) https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-refresh.html                
+                waitForActiveShards: 2 // optional, defaults to 1 ( ie. wait only for primary ) https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html#create-index-wait-for-active-shards
+                index: { // optional applied on index create, https://www.elastic.co/guide/en/elasticsearch/reference/6.x/indices-create-index.html
+                    settings : { // will be merged with the default ones,
+                        number_of_shards: 3, // optional defaults to 1,
+                        number_of_replicas: 1 // optional defaults to 0,
+                    },
+                    mappings : { // optiona will be merged with the default ones, 
+                        properties: { // specific properties to not be handled by dynamic mapper
+                            title: { 
+                                type: "text"
+                            }
+                        }                    
+                    }
                 }
             }
         }
