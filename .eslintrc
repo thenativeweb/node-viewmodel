@@ -1,5 +1,8 @@
 ---
 
+plugins:
+  - no-only-in-tests
+
 env:
   browser: true
   node: true
@@ -11,7 +14,6 @@ globals:
   describeSaga: false
   describeEvent: false
   describeCommand: false
-  before: false
   it: false
   xit: false
   window : false
@@ -24,7 +26,6 @@ globals:
   describeChapter: false
   describeStep: false
   document : false
-  window: false
   File : false
   FormData: false
   QCodeDecoder: false
@@ -79,17 +80,3 @@ rules:
   eol-last: 0
   no-trailing-spaces: 0
   indent: 0
-
- # REACT
-  react/jsx-no-undef: 2
-  react/jsx-uses-vars: 1
-  react/jsx-quotes: 1
-  react/jsx-uses-react: 1
-  react/no-did-mount-set-state: 1
-  react/no-did-update-set-state: 1
-  react/prop-types: 1
-  react/react-in-jsx-scope: 1
-  react/self-closing-comp: 1
-  react/no-multi-comp: 0
-  react/wrap-multilines: 1
-  react/display-name: 0
