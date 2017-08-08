@@ -266,9 +266,9 @@ Additionaly for elasticsearch6 the number of shards, number of replicas, the ref
                         number_of_shards: 3, // optional defaults to 1,
                         number_of_replicas: 1 // optional defaults to 0,
                     },
-                    mappings : { // optiona will be merged with the default ones, 
+                    mappings : { // optiona will be merged with the default ones,
                         properties: { // specific properties to not be handled by dynamic mapper
-                            title: { 
+                            title: {
                                 type: "text"
                             }
                         }                    
@@ -319,7 +319,7 @@ You can use your own db implementation by extending this...
 
 # License
 
-Copyright (c) 2016 Adriano Raiano
+Copyright (c) 2017 Adriano Raiano
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

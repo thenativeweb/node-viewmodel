@@ -1,3 +1,6 @@
+## [v1.6.0](https://github.com/adrai/node-viewmodel/compare/v1.5.22...v1.6.0)
+- Elasticsearch 6.X and 5.x implementation [#51](https://github.com/adrai/node-viewmodel/pull/51) thanks to [nanov](https://github.com/nanov) and his company [eCollect](https://github.com/eCollect) which enabled him to work also during working hours
+
 ## [v1.5.22](https://github.com/adrai/node-viewmodel/compare/v1.5.20...v1.5.22)
 - fix for new mongodb driver
 

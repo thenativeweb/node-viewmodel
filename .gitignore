@@ -19,3 +19,5 @@ node_modules/**/*
 dump.rdb
 
 .idea
+
+package-lock.json
