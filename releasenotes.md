@@ -1,3 +1,6 @@
+## [v1.7.2](https://github.com/adrai/node-viewmodel/compare/v1.7.1...v1.7.2)
+- correct require statement
+
 ## [v1.7.1](https://github.com/adrai/node-viewmodel/compare/v1.7.0...v1.7.1)
 - fix the Viewmodel toJSON method deserialize date ISO string to a date [#53](https://github.com/adrai/node-viewmodel/pull/53) thanks to [emmkong](https://github.com/emmkong)
 
