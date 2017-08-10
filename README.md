@@ -294,6 +294,7 @@ Currently these databases are supported:
 7. documentdb ([documentdb](https://github.com/Azure/azure-documentdb-node), [doqmentdb](https://github.com/a8m/doqmentdb))
 8. elasticsearch ([elasticsearch] (https://github.com/elastic/elasticsearch-js))
 9. elasticsearch6 ([elasticsearch] (https://github.com/elastic/elasticsearch-js)) - for Elasticsearch 5.x and 6.x
+10. dynamodb ([aws-sdk] (https://github.com/aws/aws-sdk-js))
 
 ## own db implementation
 You can use your own db implementation by extending this...
