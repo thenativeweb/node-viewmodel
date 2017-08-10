@@ -1,3 +1,6 @@
+## [v1.7.1](https://github.com/adrai/node-viewmodel/compare/v1.7.0...v1.7.1)
+- fix the Viewmodel toJSON method deserialize date ISO string to a date [#53](https://github.com/adrai/node-viewmodel/pull/53) thanks to [emmkong](https://github.com/emmkong)
+
 ## [v1.7.0](https://github.com/adrai/node-viewmodel/compare/v1.6.0...v1.7.0)
 - AWS DynamoDb implementation [#52](https://github.com/adrai/node-viewmodel/pull/52) thanks to [emmkong](https://github.com/emmkong)
 
