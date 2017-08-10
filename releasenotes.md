@@ -1,3 +1,6 @@
+## [v1.7.3](https://github.com/adrai/node-viewmodel/compare/v1.7.2...v1.7.3)
+- move aws-sdk to dev dep
+
 ## [v1.7.2](https://github.com/adrai/node-viewmodel/compare/v1.7.1...v1.7.2)
 - correct require statement
 
