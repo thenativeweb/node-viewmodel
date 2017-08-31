@@ -1,3 +1,6 @@
+## [v1.7.4](https://github.com/adrai/node-viewmodel/compare/v1.7.3...v1.7.4)
+- fixing dynamodb DocumentClient initialization [#53](https://github.com/adrai/node-viewmodel/pull/54) thanks to [Glockenbeat](https://github.com/Glockenbeat)
+
 ## [v1.7.3](https://github.com/adrai/node-viewmodel/compare/v1.7.2...v1.7.3)
 - move aws-sdk to dev dep
 
