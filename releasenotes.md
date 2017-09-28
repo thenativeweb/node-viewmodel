@@ -1,3 +1,6 @@
+## [v1.7.6](https://github.com/adrai/node-viewmodel/compare/v1.7.5...v1.7.6)
+- Dynamodb filter expression fix [#55](https://github.com/adrai/node-viewmodel/pull/56) thanks to [Glockenbeat](https://github.com/Glockenbeat)
+
 ## [v1.7.5](https://github.com/adrai/node-viewmodel/compare/v1.7.4...v1.7.5)
 - Switching DynamoDB scan to FilterExpression [#55](https://github.com/adrai/node-viewmodel/pull/55) thanks to [Glockenbeat](https://github.com/Glockenbeat)
 
