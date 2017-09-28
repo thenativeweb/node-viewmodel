@@ -1,7 +1,7 @@
 sudo: true
 
 # Elasticsearch 5 requires Java 8
-# https://www.peterbe.com/plog/elasticsearch-5-in-travis-ci 
+# https://www.peterbe.com/plog/elasticsearch-5-in-travis-ci
 addons:
   apt:
     packages:
@@ -21,7 +21,6 @@ services:
 
 language: node_js
 node_js:
-  - "0.12"
   - "4"
   - "6"
   - "8"
@@ -33,7 +32,7 @@ branches:
 notifications:
   email:
     - adriano@raiano.ch
-    
+
 env:
   global:
     - AWS_ACCESS_KEY_ID=AKID
