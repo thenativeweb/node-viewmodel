@@ -1,3 +1,6 @@
+## [v1.8.0](https://github.com/adrai/node-viewmodel/compare/v1.7.6...v1.8.0)
+- compatibility with new mongodb version (3.x)
+
 ## [v1.7.6](https://github.com/adrai/node-viewmodel/compare/v1.7.5...v1.7.6)
 - Dynamodb filter expression fix [#55](https://github.com/adrai/node-viewmodel/pull/56) thanks to [Glockenbeat](https://github.com/Glockenbeat)
 
