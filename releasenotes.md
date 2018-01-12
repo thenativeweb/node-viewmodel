@@ -1,3 +1,6 @@
+## [v1.8.1](https://github.com/adrai/node-viewmodel/compare/v1.8.0...v1.8.1)
+- remove deprecated option max_attempts from redis options
+
 ## [v1.8.0](https://github.com/adrai/node-viewmodel/compare/v1.7.6...v1.8.0)
 - compatibility with new mongodb version (3.x)
 
