@@ -800,6 +800,191 @@ describe.only('Repository write', function() {
 
                       }
 
+                      var bulkCommit = ['inmemory', 'mongodb'];
+
+                      if (_.includes(bulkCommit, type)) {
+
+                        describe('bulkCommit,', function () {
+
+                          describe('happy path', function() {
+
+                            it('it should work as expected', function (done) {
+
+                              dummyRepo.get('81234781_bulk', function (err, vm1) {
+                                vm1.set('age', 18);
+                                vm1.set('name', 'abcdefg');
+                                vm1.set('bulk', true);
+                                dummyRepo.get('14123412_bulk', function (err, vm2) {
+                                  vm2.set('age', 6);
+                                  vm2.set('special', true);
+                                  vm2.set('name', 'defghijklmnopq');
+                                  vm2.set('bulk', true);
+                                  dummyRepo.get('941931_bulk', function (err, vm3) {
+                                    vm3.set('age', 34);
+                                    vm3.set('tags', ['a', 'b', 'c']);
+                                    vm3.set('name', 'opqrstuvwxyz');
+                                    vm3.set('bulk', true);
+                                    
+                                    dummyRepo.bulkCommit([vm1, vm2, vm3], function(err, vms) {
+                                      expect(err).not.to.be.ok();
+                                      expect(vms[0].actionOnCommit).to.eql('update');
+                                      expect(vms[1].actionOnCommit).to.eql('update');
+                                      expect(vms[2].actionOnCommit).to.eql('update');
+                                      expect(vms).to.have.length(3);
+
+                                      dummyRepo.find({ bulk: true }, function (err, vms) {
+                                        expect(err).not.to.be.ok();
+                                        expect(vms).to.have.length(3);
+  
+                                        done();
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+  
+                            });
+
+                          });
+
+                          describe('concurrency on insert', function () {
+
+                            it('it should work as expected', function (done) {
+  
+                              dummyRepo.get('81234781_bulk', function (err, vm1) {
+                                vm1.set('age', 18);
+                                vm1.set('name', 'abcdefg');
+                                vm1.set('bulk', true);
+                                dummyRepo.get('14123412_bulk', function (err, vm2) {
+                                  vm2.set('age', 6);
+                                  vm2.set('special', true);
+                                  vm2.set('name', 'defghijklmnopq');
+                                  vm2.set('bulk', true);
+                                  dummyRepo.get('941931_bulk', function (err, vm3) {
+                                    vm3.set('age', 34);
+                                    vm3.set('tags', ['a', 'b', 'c']);
+                                    vm3.set('name', 'opqrstuvwxyz');
+                                    vm3.set('bulk', true);
+  
+                                    dummyRepo.get('941931_bulk', function (err, vm) {
+                                      vm.set('age', 34);
+                                      vm.set('tags', ['a', 'b', 'c']);
+                                      vm.set('name', 'opqrstuvwxyz');
+                                      vm.set('changedByOther', true);
+                                      dummyRepo.commit(vm, function() {
+                                        dummyRepo.bulkCommit([vm1, vm2, vm3], function(err) {
+                                          expect(err).to.be.a(ConcurrencyError);
+                                          done();
+                                        });
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+  
+                            });
+  
+                          });
+
+                          describe('concurrency on update', function () {
+
+                            beforeEach(function(done) {
+                              dummyRepo.get('941931_bulk', function (err, vm) {
+                                vm.set('age', 34);
+                                vm.set('tags', ['a', 'b', 'c']);
+                                vm.set('name', 'opqrstuvwxyz');
+                                vm.set('original', true);
+                                dummyRepo.commit(vm, function() {
+                                  dummyRepo.get('81234781_bulk', function (err, vm) {
+                                    vm.set('age', 18);
+                                    vm.set('name', 'abcdefg');
+                                    vm.set('existing', true);
+                                    vm.set('original', true);
+                                    dummyRepo.commit(vm, done);
+                                  });
+                                });
+                              });
+                            });
+
+                            it('it should work as expected', function (done) {
+
+                              dummyRepo.get('81234781_bulk', function (err, vm1) {
+                                vm1.set('age', 18);
+                                vm1.set('name', 'abcdefg');
+                                vm1.set('bulk', true);
+                                dummyRepo.get('14123412_bulk', function (err, vm2) {
+                                  vm2.set('age', 6);
+                                  vm2.set('special', true);
+                                  vm2.set('name', 'defghijklmnopq');
+                                  vm2.set('bulk', true);
+                                  dummyRepo.get('941931_bulk', function (err, vm3) {
+                                    vm3.set('age', 34);
+                                    vm3.set('tags', ['a', 'b', 'c']);
+                                    vm3.set('name', 'opqrstuvwxyz');
+                                    vm3.set('bulk', true);
+
+                                    dummyRepo.get('941931_bulk', function (err, vm) {
+                                      vm.set('age', 34);
+                                      vm.set('tags', ['a', 'b', 'c']);
+                                      vm.set('name', 'opqrstuvwxyz');
+                                      vm.set('changedByOther', true);
+                                      dummyRepo.commit(vm, function() {
+                                        dummyRepo.bulkCommit([vm1, vm2, vm3], function(err) {
+                                          expect(err).to.be.a(ConcurrencyError);
+                                          done();
+                                        });
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+  
+                            });
+  
+                          });
+
+                          describe('concurrency on delete', function () {
+
+                            beforeEach(function(done) {
+                              dummyRepo.get('81234781_to_del_bulk', function (err, vm) {
+                                vm.set('age', 18);
+                                vm.set('name', 'abcdefg');
+                                vm.set('existing', true);
+                                vm.set('original', true);
+                                dummyRepo.commit(vm, done);
+                              });
+                            });
+
+                            it('it should work as expected', function (done) {
+  
+                              dummyRepo.get('81234781_to_del_bulk', function (err, vm1) {
+                                vm1.destroy();
+                                dummyRepo.get('941931_bulk', function (err, vm3) {
+                                  vm3.set('age', 34);
+                                  vm3.set('tags', ['a', 'b', 'c']);
+                                  vm3.set('name', 'opqrstuvwxyz');
+                                  vm3.set('bulk', true);
+
+                                  dummyRepo.get('81234781_to_del_bulk', function (err, vm) {
+                                    vm.set('changed', true);
+                                    dummyRepo.commit(vm, function() {
+                                      dummyRepo.bulkCommit([vm1, vm3], function(err) {
+                                        expect(err).to.be.a(ConcurrencyError);
+                                        done();
+                                      });
+                                    });
+                                  });
+                                });
+                              });
+  
+                            });
+  
+                          });
+
+                        });
+
+                      }
+
                     });
 
                   });

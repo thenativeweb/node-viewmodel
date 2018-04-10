@@ -194,6 +194,20 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 
 # Implementation differences
 
+## Some implementations support bulkCommit
+
+    dummyRepo.bulkCommit([vm1, vm2, vm3], function(err) {
+        if(err) {
+            console.log('ohhh :-(');
+            return;
+        }
+    });
+
+currently supported by:
+- inmemory
+- mongodb
+
+
 ## mongodb
 For mongodb you can define indexes for performance boosts in find function.
 
