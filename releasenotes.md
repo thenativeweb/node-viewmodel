@@ -1,3 +1,6 @@
+## [v1.10.0](https://github.com/adrai/node-viewmodel/compare/v1.9.1...v1.10.0)
+- bulkCommit for Elasticsearch 6.Ximplementation [#58](https://github.com/adrai/node-viewmodel/pull/58) thanks to [nanov](https://github.com/nanov)
+
 ## [v1.9.1](https://github.com/adrai/node-viewmodel/compare/v1.9.0...v1.9.1)
 - fix typo in error case
 
