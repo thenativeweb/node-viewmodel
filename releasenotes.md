@@ -1,3 +1,6 @@
+## [v1.9.1](https://github.com/adrai/node-viewmodel/compare/v1.9.0...v1.9.1)
+- fix typo in error case
+
 ## [v1.9.0](https://github.com/adrai/node-viewmodel/compare/v1.8.1...v1.9.0)
 - introduce optional bulkCommit
 
