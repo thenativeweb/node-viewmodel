@@ -76,7 +76,8 @@ describe.only('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch6', 'dynamodb'/*, 'elasticsearch', 'documentdb', 'azuretable'*/];
+      var types = ['elasticsearch6'];
+      //var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch6', 'dynamodb'/*, 'elasticsearch', 'documentdb', 'azuretable'*/];
 
       types.forEach(function(type) {
 
@@ -800,7 +801,7 @@ describe.only('Repository write', function() {
 
                       }
 
-                      var bulkCommit = ['inmemory', 'mongodb'];
+                      var bulkCommit = ['inmemory', 'mongodb', 'elasticsearch6'];
 
                       if (_.includes(bulkCommit, type)) {
 
@@ -832,7 +833,17 @@ describe.only('Repository write', function() {
                                       expect(vms[2].actionOnCommit).to.eql('update');
                                       expect(vms).to.have.length(3);
 
-                                      dummyRepo.find({ bulk: true }, function (err, vms) {
+                                      var query = { bulk: true };
+                                      if (type === 'elasticsearch6')
+                                        query = {
+                                          bool: {
+                                            filter: [
+                                              { term: {bulk: true}}
+                                            ]
+                                          }
+                                        }
+      
+                                      dummyRepo.find(query, function (err, vms) {
                                         expect(err).not.to.be.ok();
                                         expect(vms).to.have.length(3);
   
