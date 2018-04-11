@@ -26,7 +26,7 @@
     "cradle": ">=0.6.7",
     "documentdb": ">=0.9.3",
     "doqmentdb": ">=0.2.7",
-    "elasticsearch": "13.x.x",
+    "elasticsearch": "14.x.x",
     "eslint": "^4.3.0",
     "eslint-plugin-no-only-tests": "^2.0.0",
     "expect.js": ">= 0.1.2",
@@ -74,6 +74,6 @@
     }
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --exit"
   }
 }

@@ -206,6 +206,7 @@ Make shure you have installed the required driver, in this example run: 'npm ins
 currently supported by:
 - inmemory
 - mongodb
+- elasticsearch6
 
 
 ## mongodb
