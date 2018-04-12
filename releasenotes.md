@@ -1,3 +1,6 @@
+## [v1.10.4](https://github.com/adrai/node-viewmodel/compare/v1.10.3...v1.10.4)
+- bulkCommit: mongodb fix concurrency check for upserts
+
 ## [v1.10.3](https://github.com/adrai/node-viewmodel/compare/v1.10.2...v1.10.3)
 - bulkCommit: check for empty bulkOperations
 
