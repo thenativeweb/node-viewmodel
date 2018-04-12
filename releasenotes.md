@@ -1,3 +1,6 @@
+## [v1.10.3](https://github.com/adrai/node-viewmodel/compare/v1.10.2...v1.10.3)
+- bulkCommit: check for empty bulkOperations
+
 ## [v1.10.2](https://github.com/adrai/node-viewmodel/compare/v1.10.1...v1.10.2)
 - bulkCommit: mongodb wait for serverStatus call
 
