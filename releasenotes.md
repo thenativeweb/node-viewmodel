@@ -1,3 +1,6 @@
+## [v1.10.5](https://github.com/adrai/node-viewmodel/compare/v1.10.4...v1.10.5)
+- elasticsearch6: bulkCommit fix
+
 ## [v1.10.4](https://github.com/adrai/node-viewmodel/compare/v1.10.3...v1.10.4)
 - bulkCommit: mongodb fix concurrency check for upserts
 
@@ -11,7 +14,7 @@
 - bulkCommit: check for empty vms
 
 ## [v1.10.0](https://github.com/adrai/node-viewmodel/compare/v1.9.1...v1.10.0)
-- bulkCommit for Elasticsearch 6.Ximplementation [#58](https://github.com/adrai/node-viewmodel/pull/58) thanks to [nanov](https://github.com/nanov)
+- bulkCommit for Elasticsearch 6.X implementation [#58](https://github.com/adrai/node-viewmodel/pull/58) thanks to [nanov](https://github.com/nanov)
 
 ## [v1.9.1](https://github.com/adrai/node-viewmodel/compare/v1.9.0...v1.9.1)
 - fix typo in error case
