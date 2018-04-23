@@ -1,3 +1,6 @@
+## [v1.10.7](https://github.com/adrai/node-viewmodel/compare/v1.10.6...v1.10.7)
+- elasticsearch6: upsert bulkCommit for elasticsearch6 ( handle create -> update -> update ) [#61](https://github.com/adrai/node-viewmodel/pull/61) thanks to [nanov](https://github.com/nanov)
+
 ## [v1.10.6](https://github.com/adrai/node-viewmodel/compare/v1.10.5...v1.10.6)
 - elasticsearch6: fix potential concurrency error on multiple updates.
 
