@@ -824,13 +824,19 @@ describe.only('Repository write', function() {
                                     vm3.set('tags', ['a', 'b', 'c']);
                                     vm3.set('name', 'opqrstuvwxyz');
                                     vm3.set('bulk', true);
+
+                                    // upsert
+                                    var vm4 = new ViewModel({id: '941931_upsert_bulk', bulk: true }, dummyRepo);
+                                    vm4.actionOnCommit = 'update'; // simulate create -> update -> update replay scenario
+                                              
                                     
-                                    dummyRepo.bulkCommit([vm1, vm2, vm3], function(err, vms) {
+                                    dummyRepo.bulkCommit([vm1, vm2, vm3, vm4], function(err, vms) {
                                       expect(err).not.to.be.ok();
                                       expect(vms[0].actionOnCommit).to.eql('update');
                                       expect(vms[1].actionOnCommit).to.eql('update');
                                       expect(vms[2].actionOnCommit).to.eql('update');
-                                      expect(vms).to.have.length(3);
+                                      expect(vms[3].actionOnCommit).to.eql('update');
+                                      expect(vms).to.have.length(4);
 
                                       var query = { bulk: true };
                                       if (type === 'elasticsearch6')
@@ -844,7 +850,7 @@ describe.only('Repository write', function() {
       
                                       dummyRepo.find(query, function (err, vms) {
                                         expect(err).not.to.be.ok();
-                                        expect(vms).to.have.length(3);
+                                        expect(vms).to.have.length(4);
   
                                         done();
                                       });
