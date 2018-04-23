@@ -1,3 +1,6 @@
+## [v1.10.6](https://github.com/adrai/node-viewmodel/compare/v1.10.5...v1.10.6)
+- elasticsearch6: fix potential concurrency error on multiple updates.
+
 ## [v1.10.5](https://github.com/adrai/node-viewmodel/compare/v1.10.4...v1.10.5)
 - elasticsearch6: bulkCommit fix
 
