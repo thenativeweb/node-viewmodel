@@ -294,6 +294,57 @@ Additionaly for elasticsearch6 the number of shards, number of replicas, the ref
     });
 ```
 
+## Firestore
+
+### Setup
+
+#### Library installation
+
+`yarn add @google-cloud/firestore` or `npm install --save @google-cloud/firestore`
+
+#### Options
+
+Use the `firestore` type to support Google's Firestore database, and store your KeyFile in a location accessible by your application.
+
+```javascript
+    const options = {
+        repository: {
+            type: 'firestore',
+            projectId: 'YOUR_PROJECT_ID',
+            keyFilename: '/path/to/keyfile.json'
+        },
+    };
+```
+
+### Find Queries
+
+Simple (equality comparison) find queries are supported by passing javascript objects as the query parameter, or more complex queries can be executed via nested arrays. In the case of multiple key/value pairs or nested arrays, the composite predicates form logical ANDs.
+
+``` javascript
+    // Simple Object format
+    aRepo.find({'aProp': 'aValue', 'secondProp': 'secondValue'}, function (err, vm) {
+        if (err) {
+            console.log('Repo find error', err);
+            return;
+        }
+        console.log('Found', vm);
+    });
+
+    // Nested array syntax, allows for more complex predicates
+    aRepo.find([['aProp', '==', 'aValue'], ['secondProp', '<', 10000]], function (err, vm) {
+        if (err) {
+            console.log('Repo find error', err);
+            return;
+        }
+        console.log('Found', vm);
+    });
+```
+
+The queryOptions parameter supports limit, skip, and sort, in a mongoDb-like syntax.
+
+### Testing Setup
+
+To provide the authentication file to tests, the `GOOGLE_APPLICATION_CREDENTIALS` environment setting should point to the file so it can be loaded by firestore. To inject the file in TravisCI, create a new environment variable called `BASE64_GOOGLE_KEY` in the Travis GUI, and set the value of this to be the Base64 encoded content of the file. The .travis.yml file contains configuration to decode this setting and write it out to a known location for the CI settings to pickup.
 
 # [Release notes](https://github.com/adrai/node-viewmodel/blob/master/releasenotes.md)
 
@@ -310,6 +361,7 @@ Currently these databases are supported:
 8. elasticsearch ([elasticsearch] (https://github.com/elastic/elasticsearch-js))
 9. elasticsearch6 ([elasticsearch] (https://github.com/elastic/elasticsearch-js)) - for Elasticsearch 5.x and 6.x
 10. dynamodb ([aws-sdk] (https://github.com/aws/aws-sdk-js))
+11. firestore ([@google-cloud/firestore] (https://github.com/googleapis/nodejs-firestore))
 
 ## own db implementation
 You can use your own db implementation by extending this...
