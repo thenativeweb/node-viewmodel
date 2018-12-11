@@ -1,4 +1,4 @@
-## [v1.10.9](https://github.com/adrai/node-viewmodel/compare/v1.10.8...v1.10.9)
+## [v1.10.10](https://github.com/adrai/node-viewmodel/compare/v1.10.8...v1.10.10)
 - Increase DynamoDB performance [#66](https://github.com/adrai/node-viewmodel/pull/66) thanks to [Peter Schramm](https://github.com/Glockenbeat)
 
 ## [v1.10.8](https://github.com/adrai/node-viewmodel/compare/v1.10.7...v1.10.8)
