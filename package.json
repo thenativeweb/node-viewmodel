@@ -1,7 +1,7 @@
 {
   "author": "adrai",
   "name": "viewmodel",
-  "version": "1.10.10",
+  "version": "1.10.11",
   "private": false,
   "main": "index.js",
   "engines": {

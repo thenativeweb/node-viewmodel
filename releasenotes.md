@@ -1,3 +1,6 @@
+## [v1.10.11](https://github.com/adrai/node-viewmodel/compare/v1.10.10...v1.10.11)
+- Fix options indexes [#68](https://github.com/adrai/node-viewmodel/pull/68) thanks to [tommiii](https://github.com/tommiii)
+
 ## [v1.10.10](https://github.com/adrai/node-viewmodel/compare/v1.10.8...v1.10.10)
 - Increase DynamoDB performance [#66](https://github.com/adrai/node-viewmodel/pull/66) thanks to [Peter Schramm](https://github.com/Glockenbeat)
 
