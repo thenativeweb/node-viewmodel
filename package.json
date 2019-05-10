@@ -15,6 +15,7 @@
     "dotty": "0.0.2",
     "jsondate": "0.0.1",
     "lodash": "4.17.10",
+    "node-native-helpers": "0.0.1",
     "parent-require": "1.0.0",
     "sift": "5.0.0",
     "tolerance": "1.0.0",
