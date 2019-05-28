@@ -231,6 +231,25 @@ describe('Repository read', function() {
 
               describe('calling get', function() {
 
+                describe('subscribing to before/after-database-get', function() {
+
+                  it('it should emit the correct event', function(done) {
+
+                    var receivedBefore = false;
+                    var receivedAfter = false;
+                    dummyRepo.on('before-database-get', function() { receivedBefore = true; });
+                    dummyRepo.on('after-database-get', function() { receivedAfter = true; });
+
+                    dummyRepo.get(function() {
+                      expect(receivedBefore).to.eql(true);
+                      expect(receivedAfter).to.eql(true);
+                      done();
+                    });
+
+                  });
+
+                });
+
                 describe('without an id', function() {
 
                   it('it should return null', function(done) {
@@ -293,6 +312,25 @@ describe('Repository read', function() {
               });
 
               describe('calling find', function() {
+
+                describe('subscribing to before/after-database-find', function() {
+
+                  it('it should emit the correct event', function(done) {
+
+                    var receivedBefore = false;
+                    var receivedAfter = false;
+                    dummyRepo.on('before-database-find', function() { receivedBefore = true; });
+                    dummyRepo.on('after-database-find', function() { receivedAfter = true; });
+
+                    dummyRepo.find(function() {
+                      expect(receivedBefore).to.eql(true);
+                      expect(receivedAfter).to.eql(true);
+                      done();
+                    });
+
+                  });
+
+                });
 
                 describe('without a query object', function() {
 
@@ -426,7 +464,7 @@ describe('Repository read', function() {
                           dummyWriteRepo.commit(vm, function(err) {
                             dummyWriteRepo.get('4568', function(err, vm2) {
 
-                              vm.set('foo', 'wat');
+                              vm2.set('foo', 'wat');
                               dummyWriteRepo.commit(vm2, done);
                             });
                           });
@@ -595,6 +633,25 @@ describe('Repository read', function() {
 
               describe('calling findOne', function() {
 
+                describe('subscribing to before/after-database-findOne', function() {
+
+                  it('it should emit the correct event', function(done) {
+
+                    var receivedBefore = false;
+                    var receivedAfter = false;
+                    dummyRepo.on('before-database-findOne', function() { receivedBefore = true; });
+                    dummyRepo.on('after-database-findOne', function() { receivedAfter = true; });
+
+                    dummyRepo.findOne(function() {
+                      expect(receivedBefore).to.eql(true);
+                      expect(receivedAfter).to.eql(true);
+                      done();
+                    });
+
+                  });
+
+                });
+
                 describe('without a query object', function() {
 
                   describe('having no records', function() {
@@ -719,7 +776,7 @@ describe('Repository read', function() {
                           dummyWriteRepo.commit(vm, function(err) {
                             dummyWriteRepo.get('4568', function(err, vm2) {
 
-                              vm.set('foo', 'wat');
+                              vm2.set('foo', 'wat');
                               dummyWriteRepo.commit(vm2, done);
                             });
                           });
@@ -729,7 +786,7 @@ describe('Repository read', function() {
 
                       describe('not matching the query object', function() {
 
-                        it('it should return an empty array', function(done) {
+                        it('it should return a falsy value', function(done) {
 
                           var query = { foo: 'bas' };
                           // elasticsearch6 special case, as it does not supports only native queries
@@ -756,7 +813,7 @@ describe('Repository read', function() {
 
                       describe('matching the query object', function() {
 
-                        it('it should return all matching records within an array', function(done) {
+                        it('it should return one matching record', function(done) {
 
                           var query = { foo: 'bar' };
                           // elasticsearch6 special case, as it does not supports only native queries

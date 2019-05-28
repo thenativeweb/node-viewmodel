@@ -191,6 +191,18 @@ Make shure you have installed the required driver, in this example run: 'npm ins
         }
     });
 
+## Catch before and after database events
+
+    var repository = viewmodel.write({ type: 'mongodb' });
+    repository.on('before-database-get', function(ms, id) { console.log(ms, id); });
+    repository.on('after-database-get', function(ms, id) { console.log(ms, id); });
+    repository.on('before-database-find', function(ms, query, queryOptions) { console.log(ms, query, queryOptions); });
+    repository.on('after-database-find', function(ms, query, queryOptions) { console.log(ms, query, queryOptions); });
+    repository.on('before-database-findOne', function(ms, query, queryOptions) { console.log(ms, query, queryOptions); });
+    repository.on('after-database-findOne', function(ms, query, queryOptions) { console.log(ms, query, queryOptions); });
+    repository.on('before-database-commit', function(ms, vm) { console.log(ms, vm); });
+    repository.on('after-database-commit', function(ms, vm) { console.log(ms, vm); });
+    
 
 # Implementation differences
 
