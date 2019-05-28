@@ -213,25 +213,27 @@ describe.only('Repository write', function() {
 
               describe('calling get', function() {
 
-                describe('subscribing to before/after-database-get', function() {
+                if (type !== 'dynamodb') {
+                  describe('subscribing to before/after-database-get', function() {
 
-                  it('it should emit the correct event', function(done) {
+                    it('it should emit the correct event', function(done) {
 
-                    var receivedBefore = false;
-                    var receivedAfter = false;
-                    dummyRepo.on('before-database-get', function() { receivedBefore = true; });
-                    dummyRepo.on('after-database-get', function() { receivedAfter = true; });
+                      var receivedBefore = false;
+                      var receivedAfter = false;
+                      dummyRepo.on('before-database-get', function() { receivedBefore = true; });
+                      dummyRepo.on('after-database-get', function() { receivedAfter = true; });
 
-                    dummyRepo.get(function() {
-                      expect(receivedBefore).to.eql(true);
-                      expect(receivedAfter).to.eql(true);
-                      done();
+                      dummyRepo.get(function() {
+                        expect(receivedBefore).to.eql(true);
+                        expect(receivedAfter).to.eql(true);
+                        done();
+                      });
+
                     });
 
                   });
-
-                });
-
+                }
+                
                 describe('without an id', function() {
 
                   it('it should return a new object with a new id', function(done) {
@@ -305,24 +307,26 @@ describe.only('Repository write', function() {
 
               describe('calling find', function() {
 
-                describe('subscribing to before/after-database-find', function() {
+                if (type !== 'dynamodb') {
+                  describe('subscribing to before/after-database-find', function() {
 
-                  it('it should emit the correct event', function(done) {
+                    it('it should emit the correct event', function(done) {
 
-                    var receivedBefore = false;
-                    var receivedAfter = false;
-                    dummyRepo.on('before-database-find', function() { receivedBefore = true; });
-                    dummyRepo.on('after-database-find', function() { receivedAfter = true; });
+                      var receivedBefore = false;
+                      var receivedAfter = false;
+                      dummyRepo.on('before-database-find', function() { receivedBefore = true; });
+                      dummyRepo.on('after-database-find', function() { receivedAfter = true; });
 
-                    dummyRepo.find(function() {
-                      expect(receivedBefore).to.eql(true);
-                      expect(receivedAfter).to.eql(true);
-                      done();
+                      dummyRepo.find(function() {
+                        expect(receivedBefore).to.eql(true);
+                        expect(receivedAfter).to.eql(true);
+                        done();
+                      });
+
                     });
 
                   });
-
-                });
+                }
 
                 describe('without a query object', function() {
 
@@ -1100,24 +1104,26 @@ describe.only('Repository write', function() {
 
               describe('calling findOne', function() {
 
-                describe('subscribing to before/after-database-findOne', function() {
+                if (type !== 'dynamodb') {
+                  describe('subscribing to before/after-database-findOne', function() {
 
-                  it('it should emit the correct event', function(done) {
+                    it('it should emit the correct event', function(done) {
 
-                    var receivedBefore = false;
-                    var receivedAfter = false;
-                    dummyRepo.on('before-database-findOne', function() { receivedBefore = true; });
-                    dummyRepo.on('after-database-findOne', function() { receivedAfter = true; });
+                      var receivedBefore = false;
+                      var receivedAfter = false;
+                      dummyRepo.on('before-database-findOne', function() { receivedBefore = true; });
+                      dummyRepo.on('after-database-findOne', function() { receivedAfter = true; });
 
-                    dummyRepo.findOne(function() {
-                      expect(receivedBefore).to.eql(true);
-                      expect(receivedAfter).to.eql(true);
-                      done();
+                      dummyRepo.findOne(function() {
+                        expect(receivedBefore).to.eql(true);
+                        expect(receivedAfter).to.eql(true);
+                        done();
+                      });
+
                     });
 
                   });
-
-                });
+                }
 
                 describe('without a query object', function() {
 
@@ -1358,32 +1364,34 @@ describe.only('Repository write', function() {
 
               describe('calling commit', function() {
 
-                describe('subscribing to before/after-database-commit', function() {
+                if (type !== 'dynamodb') {
+                  describe('subscribing to before/after-database-commit', function() {
 
-                  it('it should emit the correct event', function(done) {
+                    it('it should emit the correct event', function(done) {
 
-                    var receivedBefore = false;
-                    var receivedAfter = false;
-                    dummyRepo.on('before-database-commit', function() { receivedBefore = true; });
-                    dummyRepo.on('after-database-commit', function() { receivedAfter = true; });
+                      var receivedBefore = false;
+                      var receivedAfter = false;
+                      dummyRepo.on('before-database-commit', function() { receivedBefore = true; });
+                      dummyRepo.on('after-database-commit', function() { receivedAfter = true; });
 
-                    var obj = {
-                      foo: 'barrrr',
-                      set: function (k, v) {
-                        key = k;
-                        value = v;
-                      }
-                    };
+                      var obj = {
+                        foo: 'barrrr',
+                        set: function (k, v) {
+                          key = k;
+                          value = v;
+                        }
+                      };
 
-                    dummyRepo.commit(obj, function() {
-                      expect(receivedBefore).to.eql(true);
-                      expect(receivedAfter).to.eql(true);
-                      done();
+                      dummyRepo.commit(obj, function() {
+                        expect(receivedBefore).to.eql(true);
+                        expect(receivedAfter).to.eql(true);
+                        done();
+                      });
+
                     });
 
                   });
-
-                });
+                }
 
                 describe('with a single object', function() {
 
