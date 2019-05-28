@@ -1,3 +1,6 @@
+## [v1.11.0](https://github.com/adrai/node-viewmodel/compare/v1.10.11...v1.11.0)
+- introduce before and after database events
+
 ## [v1.10.11](https://github.com/adrai/node-viewmodel/compare/v1.10.10...v1.10.11)
 - Fix options indexes [#68](https://github.com/adrai/node-viewmodel/pull/68) thanks to [tommiii](https://github.com/tommiii)
 
