@@ -1,3 +1,6 @@
+## [v1.11.1](https://github.com/adrai/node-viewmodel/compare/v1.11.0...v1.11.1)
+- mongodb: useUnifiedTopology
+
 ## [v1.11.0](https://github.com/adrai/node-viewmodel/compare/v1.10.11...v1.11.0)
 - introduce before and after database events
 
