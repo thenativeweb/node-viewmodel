@@ -11,7 +11,7 @@ function cleanRepo(repo, done) {
   repo.clearAll(done);
 }
 
-describe.only('Repository write', function() {
+describe('Repository write', function() {
 
   describe('calling write', function() {
 

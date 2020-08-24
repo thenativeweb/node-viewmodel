@@ -1,3 +1,6 @@
+## [v1.11.2](https://github.com/adrai/node-viewmodel/compare/v1.11.1...v1.11.2)
+- mongodb: Support mongo atomic operators [#74](https://github.com/adrai/node-viewmodel/pull/74) thanks to [OrH](https://github.com/OrH)
+
 ## [v1.11.1](https://github.com/adrai/node-viewmodel/compare/v1.11.0...v1.11.1)
 - mongodb: useUnifiedTopology
 
