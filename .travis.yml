@@ -5,6 +5,7 @@ before_install:
   - tar -xzf /tmp/dynamodb_local_latest.tar.gz -C /tmp
   - java -Djava.library.path=/tmp/DynamoDBLocal_lib -jar /tmp/DynamoDBLocal.jar -inMemory &
   - sleep 2
+  - echo $BASE64_GOOGLE_KEY | base64 --decode > /tmp/firestore-node-viewmodel-key.json
 
 services:
   - mongodb
@@ -32,3 +33,4 @@ env:
     - AWS_SECRET_ACCESS_KEY=SECRET
     - AWS_REGION=us-east-1
     - AWS_DYNAMODB_ENDPOINT=http://localhost:8000
+    - GOOGLE_APPLICATION_CREDENTIALS=/tmp/firestore-node-viewmodel-key.json

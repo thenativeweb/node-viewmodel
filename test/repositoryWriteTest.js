@@ -76,7 +76,7 @@ describe('Repository write', function() {
 
     describe('with options containing a type property with the value of', function() {
 
-      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch6', 'dynamodb'/*, 'elasticsearch', 'documentdb', 'azuretable'*/];
+      var types = ['inmemory', 'mongodb', 'tingodb', 'couchdb', 'redis', 'elasticsearch6', 'dynamodb', 'firestore' /*, 'elasticsearch', 'documentdb', 'azuretable' */];
 
       types.forEach(function(type) {
 
@@ -524,7 +524,7 @@ describe('Repository write', function() {
 
                       });
 
-                      var noQueryArray = ['azuretable', 'documentdb', 'dynamodb'];
+                      var noQueryArray = ['azuretable', 'documentdb', 'dynamodb', 'firestore'];
 
                       if (!_.includes(noQueryArray, type)) {
 
@@ -1310,7 +1310,7 @@ describe('Repository write', function() {
 
                       });
 
-                      var noQueryArray = ['azuretable', 'documentdb', 'dynamodb'];
+                      var noQueryArray = ['azuretable', 'documentdb', 'dynamodb', 'firestore'];
 
                       if (!_.includes(noQueryArray, type)) {
 
@@ -1602,7 +1602,7 @@ describe('Repository write', function() {
 
                         });
 
-                        describe('but beeing updated by someone else in the meantime', function() {
+                        describe('but being updated by someone else in the meantime', function() {
 
                           it('it should callback with a concurrency error', function(done) {
 
@@ -1628,7 +1628,7 @@ describe('Repository write', function() {
 
                         });
 
-                        describe('but beeing updated by someone else in the meantime and creating with the same id', function() {
+                        describe('but being updated by someone else in the meantime and creating with the same id', function() {
 
                           it('it should callback with a concurrency error', function(done) {
 
@@ -1697,7 +1697,7 @@ describe('Repository write', function() {
 
                         });
 
-                        describe('but beeing updated by someone else in the meantime', function() {
+                        describe('but being updated by someone else in the meantime', function() {
 
                           it('it should callback with a concurrency error', function(done) {
 
