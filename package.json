@@ -31,7 +31,7 @@
     "eslint-plugin-no-only-tests": "^2.0.0",
     "expect.js": ">= 0.1.2",
     "mocha": ">= 4.0.0",
-    "mongodb": "2.1.x",
+    "mongodb": "3.6.x",
     "redis": ">= 0.10.1",
     "tingodb": ">= 0.0.1"
   },
